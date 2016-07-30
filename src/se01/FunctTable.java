@@ -11,8 +11,16 @@ public class FunctTable {
 	}
 
 	public void go(){
-		for(double x=left; x <= right; x += step){
-			System.out.printf("%5.1f%10.2f%n", x, (Math.tan(2*x)-3));
+
+		double tmp = Math.abs(left);
+
+		System.out.println("    x  |  F(x)");
+		System.out.println("   -----------");
+
+		while(tmp <= right){
+
+			System.out.printf("%6.1f |%6.2f%n", tmp, (Math.tan(2 * tmp)-3));
+			tmp += step;
 		}
 	}
 
