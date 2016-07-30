@@ -11,10 +11,19 @@ public class MinElem {
 		//без локали точка в разделителе не работает
 		sc.useLocale(new Locale("US"));
 
-		double a, num;
 
 		System.out.println("Insert number: ");
-		num = sc.nextDouble();
+		new MinElem().go(sc.nextDouble());
+
+	}
+
+	public void go(double num){
+
+		if(num > 1){
+			System.out.println("Number should be less than 1.");
+			System.exit(0);
+		}
+		double a;
 
 		for(int i=0;;i++){
 			a = 1/Math.pow(i + 1, 2);
