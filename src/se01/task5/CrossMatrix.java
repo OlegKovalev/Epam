@@ -32,23 +32,7 @@ public class CrossMatrix {
 		for(int i=0; i < mtrx.length; i++){
 			for(int j=0; j < mtrx.length; j++){
 
-
-
-			}
-		}
-	}
-
-
-	public static void main(String[] args){
-		int size = 10;
-
-		for(int i=0; i < size; i++){
-			for(int j=0; j < size; j++){
-				if(i == j || j == size-i-1)
-					System.out.print(1 + "\t");
-				else
-					System.out.print(0 + "\t");
-
+				System.out.print(mtrx[i][j] + "\t");
 			}
 			System.out.println();
 		}
