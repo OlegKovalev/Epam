@@ -1,4 +1,4 @@
-package se01;
+package se01.task5;
 
 public class CrossMatrix {
 	public static void main(String[] args){

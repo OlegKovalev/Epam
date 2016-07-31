@@ -1,4 +1,4 @@
-package se01;
+package se01.task2;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -10,7 +10,6 @@ public class MinElem {
 		Scanner sc = new Scanner(System.in);
 		//без локали точка в разделителе не работает
 		sc.useLocale(new Locale("US"));
-
 
 		System.out.println("Insert number: ");
 		new MinElem().go(sc.nextDouble());

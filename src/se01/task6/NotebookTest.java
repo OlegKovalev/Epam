@@ -1,6 +1,4 @@
-package se01;
-
-import org.junit.Ignore;
+package se01.task6;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertSame;

@@ -1,4 +1,4 @@
-package se01;
+package se01.task1;
 
 public class Logic {
 	public String method(){

@@ -1,4 +1,4 @@
-package se01;
+package se01.task6;
 
 public class NotebookMain {
 

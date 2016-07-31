@@ -1,4 +1,4 @@
-package se01;
+package se01.task4;
 
 public class MaxOfArray {
 

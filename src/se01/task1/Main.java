@@ -1,4 +1,6 @@
-package se01;
+package se01.task1;
+
+import se01.task1.Logic;
 
 public class Main {
 
