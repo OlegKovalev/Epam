@@ -9,7 +9,7 @@ public class Notebook {
 	}
 
 	public Notebook(){
-		this(30);
+		this(30); //нужно что-то сделать с этой константой...
 	}
 
 	public void addNote(String note){
@@ -31,8 +31,11 @@ public class Notebook {
 
 		if(notes[0] == null) index = 1;
 
+		//Сдвиг элементов после удаления
 		for(int i=0; i < tmp.length-1; i++){
-			if(index == id)	index++;
+			if(index == id){
+				index++;
+			}
 			if(notes[index] != null){
 				tmp[i] = notes[index];
 				tmp[i].setId(i);
@@ -63,18 +66,22 @@ public class Notebook {
 
 	public Note viewNote(int ind){
 
-		if(ind > notes.length) new ArrayIndexOutOfBoundsException();
+		if(ind > notes.length){
+			new ArrayIndexOutOfBoundsException();
+		}
 		return notes[ind];
 	}
 
 	public int firstEmpty(){
+
 		if(notes.length==0){
 			return -1;
 		}
 		else {
 			for(int i=0; i < notes.length; i++){
-				if(notes[i]==null)
+				if(notes[i]==null){
 					return i;
+				}
 			}
 		}
 		return -1;
@@ -89,10 +96,13 @@ public class Notebook {
 	}
 
 	public int getCountOfNonEmptyCell(){
+
 		int count=0;
 
 		for(int i=0; i < notes.length; i++){
-			if((notes[i]) != null) count++;
+			if((notes[i]) != null){
+				count++;
+			}
 		}
 		return count;
 	}
