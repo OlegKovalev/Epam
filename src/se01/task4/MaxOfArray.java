@@ -5,10 +5,11 @@ public class MaxOfArray {
 	public double maxOfSum(double[] arr){
 
 		double maxValue = Double.MIN_VALUE;
+		int lengthOfArray = arr.length;
 
-		for(int i=0; i < arr.length; i++){
-			if(arr[i] + arr[arr.length-i-1] > maxValue){
-				maxValue = arr[i] + arr[arr.length-i-1];
+		for(int i=0; i < lengthOfArray; i++){
+			if(arr[i] + arr[lengthOfArray-i-1] > maxValue){
+				maxValue = arr[i] + arr[lengthOfArray-i-1];
 			}
 		}
 		return maxValue;
