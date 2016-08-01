@@ -3,23 +3,24 @@ package se01.task6;
 public class Notebook {
 
 	private Note[] notes;
+	private static final int DEFAULT_CAPACITY = 30;
 
 	public Notebook(int capacity){
 		notes = new Note[capacity];
 	}
 
 	public Notebook(){
-		this(30); //нужно что-то сделать с этой константой...
+		this(DEFAULT_CAPACITY);
 	}
 
 	public void addNote(String note){
 
-		if(firstEmpty() == -1){
+		int indexOfFirstEmptyInArray = firstEmpty();
+
+		if(indexOfFirstEmptyInArray == -1){
 			expandArray();
 		}
-		//Возможно здесь лучше будет инициализировать
-		//переменную и присвоить ей значение метода firstEmpty()
-		notes[firstEmpty()] = new Note(firstEmpty(), note);
+		notes[indexOfFirstEmptyInArray] = new Note(indexOfFirstEmptyInArray, note);
 	}
 
 	public void removeNote(int id){
