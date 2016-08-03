@@ -1,7 +1,7 @@
 package se02;
 
-import se02.goods.Pen;
-import se02.goods.Stapler;
+import se02.good.Pen;
+import se02.good.Stapler;
 
 public class EmployeeTest {
 
