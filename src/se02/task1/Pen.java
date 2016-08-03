@@ -1,4 +1,4 @@
-package se02;
+package se02.task1;
 
 public class Pen {
 
