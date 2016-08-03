@@ -21,34 +21,42 @@ public abstract class Stationery {
 	protected abstract String getName();
 
 	public int getCost() {
+
 		return cost;
 	}
 
 	public void setCost(int cost) {
+
 		this.cost = cost;
 	}
 
 	public String getManufacturer() {
+
 		return manufacturer;
 	}
 
 	public void setManufacturer(String manufacturer) {
+
 		this.manufacturer = manufacturer;
 	}
 
 	public Color getColor() {
+
 		return color;
 	}
 
 	public void setColor(Color color) {
+
 		this.color = color;
 	}
 
 	public int getCount() {
+
 		return count;
 	}
 
 	public void setCount(int count) {
+
 		this.count = count;
 	}
 
@@ -67,6 +75,7 @@ public abstract class Stationery {
 		if (cost != stationery.cost) {
 			return false;
 		}
+
 		if (null == manufacturer){
 			return (manufacturer == stationery.manufacturer);
 		} else {
