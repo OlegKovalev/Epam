@@ -1,4 +1,4 @@
-package se02.good;
+package se02.goods;
 
 import se02.Color;
 import se02.Stationery;
