@@ -1,5 +1,7 @@
 package se02;
 
+import se02.sort.SortedByCost;
+
 import java.util.ArrayList;
 
 public class Employee {
@@ -7,6 +9,7 @@ public class Employee {
 	private ArrayList<Stationery> stationeries;
 
 	public Employee() {
+
 		this.stationeries = new ArrayList<Stationery>();
 	}
 
@@ -15,15 +18,18 @@ public class Employee {
 	}
 
 	public void setStationeries(ArrayList<Stationery> stationers) {
+
 		this.stationeries = stationers;
 	}
 
 
 	public void addStationery(Stationery st){
+
 		stationeries.add(st);
 	}
 
 	public void removeStatoinery(int index){
+
 		stationeries.remove(index);
 	}
 

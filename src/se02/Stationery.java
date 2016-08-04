@@ -8,7 +8,8 @@ public abstract class Stationery {
 	private int count;
 
 	public Stationery() {
-		this(0, "none", Color.BLACK, 0);
+
+	    this(0, "none", Color.BLACK, 0);
 	}
 
 	public Stationery(int cost, String manufacturer, Color color, int count) {
@@ -18,7 +19,7 @@ public abstract class Stationery {
 		this.count = count;
 	}
 
-	protected abstract String getName();
+//	protected abstract String getName();
 
 	public int getCost() {
 
@@ -88,12 +89,14 @@ public abstract class Stationery {
 	}
 
 	public int hashCode() {
-		return 31 * cost + ((null == manufacturer) ? 0 : manufacturer.hashCode());
+
+	    return 31 * cost + ((null == manufacturer) ? 0 : manufacturer.hashCode());
 	}
 
 	public String toString() {
-		return getName() + ": " + "cost: " + getCost() + ", manufacturer: " + getManufacturer() +
+		return getClass().getSimpleName() + ": " + "cost: " + getCost() + ", manufacturer: " + getManufacturer() +
 				", color: " + getColor() + ", count: " + getCount() + "\n";
 	}
+
 
 }
