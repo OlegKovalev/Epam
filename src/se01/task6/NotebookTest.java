@@ -1,8 +1,5 @@
 package se01.task6;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertSame;
-
 public class NotebookTest {
 
 	private Notebook nb;

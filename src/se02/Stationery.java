@@ -2,101 +2,103 @@ package se02;
 
 public abstract class Stationery {
 
-	private int cost;
-	private String manufacturer;
-	private Color color;
-	private int count;
+    private int cost;
+    private String manufacturer;
+    private Color color;
+    private int count;
+    private boolean aBoolean;
 
-	public Stationery() {
+    public Stationery() {
 
-	    this(0, "none", Color.BLACK, 0);
-	}
+        this(0, "none", Color.BLACK, 0);
+    }
 
-	public Stationery(int cost, String manufacturer, Color color, int count) {
-		this.cost = cost;
-		this.manufacturer = manufacturer;
-		this.color = color;
-		this.count = count;
-	}
+    public Stationery(int cost, String manufacturer, Color color, int count) {
+        this.cost = cost;
+        this.manufacturer = manufacturer;
+        this.color = color;
+        this.count = count;
+    }
 
-//	protected abstract String getName();
+    public int getCost() {
 
-	public int getCost() {
+        return cost;
+    }
 
-		return cost;
-	}
+    public void setCost(int cost) {
 
-	public void setCost(int cost) {
+        this.cost = cost;
+    }
 
-		this.cost = cost;
-	}
+    public String getManufacturer() {
 
-	public String getManufacturer() {
+        return manufacturer;
+    }
 
-		return manufacturer;
-	}
+    public void setManufacturer(String manufacturer) {
 
-	public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
 
-		this.manufacturer = manufacturer;
-	}
+    public Color getColor() {
 
-	public Color getColor() {
+        return color;
+    }
 
-		return color;
-	}
+    public void setColor(Color color) {
 
-	public void setColor(Color color) {
+        this.color = color;
+    }
 
-		this.color = color;
-	}
+    public int getCount() {
 
-	public int getCount() {
+        return count;
+    }
 
-		return count;
-	}
+    public void setCount(int count) {
 
-	public void setCount(int count) {
+        this.count = count;
+    }
 
-		this.count = count;
-	}
+    public boolean equals(Object obj) {
 
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (null == obj) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
+        if (this == obj) {
+            return true;
+        }
+        if (null == obj) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return aBoolean;
+        }
 
-		Stationery stationery = (Stationery) obj;
-		if (cost != stationery.cost) {
-			return false;
-		}
+        Stationery stationery = (Stationery) obj;
 
-		if (null == manufacturer){
-			return (manufacturer == stationery.manufacturer);
-		} else {
-			if (!manufacturer.equals(stationery.manufacturer)) {
-				return false;
-			}
-		}
+        if (cost != stationery.cost) {
+            return false;
+        }
 
-		return true;
-	}
+        if (null == manufacturer) {
+            return (manufacturer == stationery.manufacturer);
+        } else {
+            if (!manufacturer.equals(stationery.manufacturer)) {
+                return false;
+            }
+        }
 
-	public int hashCode() {
+        return true;
+    }
 
-	    return 31 * cost + ((null == manufacturer) ? 0 : manufacturer.hashCode());
-	}
+    public int hashCode() {
 
-	public String toString() {
-		return getClass().getSimpleName() + ": " + "cost: " + getCost() + ", manufacturer: " + getManufacturer() +
-				", color: " + getColor() + ", count: " + getCount() + "\n";
-	}
+        return 31 * cost + ((null == manufacturer) ? 0 : manufacturer.hashCode());
+    }
+
+    public String toString() {
+        return getClass().getSimpleName() + ": " + "cost: " + getCost() + ", manufacturer: " + getManufacturer() +
+                ", color: " + getColor() + ", count: " + getCount() + "\n";
+    }
 
 
+    public abstract String getName();
 }

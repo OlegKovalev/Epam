@@ -11,6 +11,7 @@ public class Marker extends Stationery {
 
 	@Override
 	public String getName() {
+
 		return "Marker";
 	}
 }

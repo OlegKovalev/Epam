@@ -1,45 +1,53 @@
 package se02;
 
-import se02.sort.SortedByCost;
-
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Employee {
 
-	private ArrayList<Stationery> stationeries;
+    private ArrayList<Stationery> stationers;
 
-	public Employee() {
+    public Employee() {
 
-		this.stationeries = new ArrayList<Stationery>();
-	}
+        this.stationers = new ArrayList<Stationery>();
+    }
 
-	public ArrayList<Stationery> getStationeries() {
-		return stationeries;
-	}
+    public ArrayList<Stationery> getStationers() {
+        return stationers;
+    }
 
-	public void setStationeries(ArrayList<Stationery> stationers) {
+    public void setStationers(ArrayList<Stationery> stationers) {
 
-		this.stationeries = stationers;
-	}
+        this.stationers = stationers;
+    }
 
 
-	public void addStationery(Stationery st){
+    public void addStationery(Stationery st) {
 
-		stationeries.add(st);
-	}
+        stationers.add(st);
+    }
 
-	public void removeStatoinery(int index){
+    public void removeStatoinery(int index) {
 
-		stationeries.remove(index);
-	}
+        stationers.remove(index);
+    }
 
-	public int getCostOfStationers(){
+    public int getCostOfStationers() {
 
-		int fullCost = 0;
+        int fullCost = 0;
 
-		for(Stationery stn : this.stationeries){
-			fullCost += stn.getCost() * stn.getCount();
-		}
-		return fullCost;
-	}
+        for (Stationery stn : this.stationers) {
+            fullCost += stn.getCost() * stn.getCount();
+        }
+        return fullCost;
+    }
+
+    public void printCollection() {
+
+        Iterator iterator = this.stationers.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next());
+        }
+    }
 }
