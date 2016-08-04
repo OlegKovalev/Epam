@@ -5,13 +5,14 @@ import se02.Stationery;
 
 public class Marker extends Stationery {
 
-	public Marker(int cost, String manufacturer, Color color, int count) {
-		super(cost, manufacturer, color, count);
-	}
+    public Marker(int cost, String manufacturer, Color color, int count) {
 
-	@Override
-	public String getName() {
+        super(cost, manufacturer, color, count);
+    }
 
-		return "Marker";
-	}
+    @Override
+    public String getName() {
+
+        return "Marker";
+    }
 }
