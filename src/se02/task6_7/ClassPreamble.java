@@ -1,4 +1,4 @@
-package se02.task5_6;
+package se02.task6_7;
 
 import java.lang.annotation.Documented;
 

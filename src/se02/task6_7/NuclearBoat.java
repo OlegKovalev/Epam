@@ -1,6 +1,4 @@
-package se02.task5_6;
-
-import java.lang.annotation.*;
+package se02.task6_7;
 
 @ClassPreamble(
         author = "Oleg Kovalev",
