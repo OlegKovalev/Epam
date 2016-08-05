@@ -2,10 +2,8 @@ package se02.task5;
 
 public class Group<T extends Number> {
 
-
     private Subject subject;
     private T mark;
-
 
     public Group(Subject subject, T mark) {
         this.subject = subject;
@@ -20,8 +18,16 @@ public class Group<T extends Number> {
         return subject;
     }
 
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
     public T getMark() {
         return mark;
+    }
+
+    public void setMark(T mark) {
+        this.mark = mark;
     }
 
     @Override
