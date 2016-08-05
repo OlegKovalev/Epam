@@ -1,5 +1,11 @@
 package se02.task5_6;
 
+import java.lang.annotation.*;
+
+@ClassPreamble(
+        author = "Oleg Kovalev",
+        date = "05/17/2016"
+)
 public class NuclearBoat {
 
     private String nameOfBoat;
