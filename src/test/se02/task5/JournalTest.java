@@ -10,7 +10,8 @@ import static org.junit.Assert.*;
  */
 public class JournalTest {
 
-    Journal
+    Journal journal = new Journal();
+
     @Before
     public void setUp() throws Exception {
 
