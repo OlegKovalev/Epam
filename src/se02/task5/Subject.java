@@ -2,9 +2,9 @@ package se02.task5;
 
 public enum Subject {
     MATH("Math", Double.class),
+    ENGLISH("English", Double.class),
     HISTORY("History", Integer.class),
-    GEOGRAPHY("Geography", Integer.class),
-    ENGLISH("English", Double.class);
+    GEOGRAPHY("Geography", Integer.class);
 
     private String nameOfSubject;
     private Class<?> classType;

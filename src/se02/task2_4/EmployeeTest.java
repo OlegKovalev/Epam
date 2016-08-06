@@ -1,8 +1,8 @@
-package se02;
+package se02.task2_4;
 
-import se02.goods.*;
-import se02.sort.SortedByCost;
-import se02.sort.SortedByName;
+import se02.task2_4.goods.*;
+import se02.task2_4.sort.SortedByCost;
+import se02.task2_4.sort.SortedByName;
 
 import java.util.Collections;
 

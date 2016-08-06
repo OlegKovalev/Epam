@@ -1,4 +1,4 @@
-package se02;
+package se02.task2_4;
 
 public enum Color {
 

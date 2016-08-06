@@ -5,28 +5,28 @@ import java.util.Arrays;
 
 public class Student {
 
-    private String nameOfStudent;
+    private String name;
     private ArrayList<Group> groups;
 
     public Student(String name){
         this(name, new ArrayList<>());
     }
 
-    public Student(String nameOfStudent, ArrayList<Group> groups) {
-        this.nameOfStudent = nameOfStudent;
+    public Student(String name, ArrayList<Group> groups) {
+        this.name = name;
         this.groups = groups;
     }
 
-    public Student(String nameOfStudent, Group ... groups) {
-        this(nameOfStudent, new ArrayList<Group>(Arrays.asList(groups)));
+    public Student(String name, Group ... groups) {
+        this(name, new ArrayList<>(Arrays.asList(groups)));
     }
 
-    public String getNameOfStudent() {
-        return nameOfStudent;
+    public String getName() {
+        return name;
     }
 
-    public void setNameOfStudent(String nameOfStudent) {
-        this.nameOfStudent = nameOfStudent;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ArrayList<Group> getGroups() {
