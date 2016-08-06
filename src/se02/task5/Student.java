@@ -42,4 +42,9 @@ public class Student {
             groups.add(subject);
         }
     }
+
+    @Override
+    public String toString(){
+        return name + ":\n" + groups;
+    }
 }

@@ -1,6 +1,7 @@
 package se02.task5;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Journal {
 
@@ -14,6 +15,10 @@ public class Journal {
         this.students = students;
     }
 
+    public Journal(Student ... students){
+        this(new ArrayList<>(Arrays.asList(students)));
+    }
+
     public ArrayList<Student> getStudents() {
         return students;
     }
@@ -25,5 +30,9 @@ public class Journal {
             }
         }
         return new ArrayList<>();
+    }
+
+    public void printStudents(){
+        this.students.forEach(System.out::println);
     }
 }
