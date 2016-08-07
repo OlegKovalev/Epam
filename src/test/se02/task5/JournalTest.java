@@ -2,6 +2,8 @@ package se02.task5;
 
 import org.junit.*;
 
+import static org.junit.Assert.assertEquals;
+
 public class JournalTest {
 
     Journal journal;
@@ -24,11 +26,16 @@ public class JournalTest {
 
     @Test
     public void getGroups() throws Exception {
-        System.out.println(journal.getGroups("student1"));
+        System.out.println("----------------------------");
+        System.out.println("student1: \n"+ journal.getGroups("student1"));
+        System.out.println("student3: \n"+ journal.getGroups("student3"));
+
     }
 
     @Test
     public void printStudents() throws Exception {
+        System.out.println("----------------------------");
+        journal.printStudents();
 
     }
 
