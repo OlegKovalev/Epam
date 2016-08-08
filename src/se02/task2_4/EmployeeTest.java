@@ -13,10 +13,10 @@ public class EmployeeTest {
 
         Employee employee = new Employee();
 
-        employee.addStationery(new Pen(200, "Bic", Color.GREEN, 2));
+        employee.addStationery(new Pen(200, "Bic", Color.GREEN, 2, "Blue"));
         employee.addStationery(new Stapler(700, "Brauberg", Color.GREEN, 1));
-        employee.addStationery(new Marker(330, "Erich Krause", Color.GREY, 1));
-        employee.addStationery(new Pencil(200, "Brauberg", Color.RED, 3));
+        employee.addStationery(new Marker(330, "Erich Krause", Color.GREY, 1, "Pink"));
+        employee.addStationery(new Pencil(200, "Brauberg", Color.RED, 3, "Black"));
         employee.addStationery(new Paper(578, "Erich Krause", Color.WHITE, 2, PaperSize.A4));
 
         System.out.println("Cost of stationers: " + employee.getCostOfStationers());

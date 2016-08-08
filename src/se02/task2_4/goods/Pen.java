@@ -3,11 +3,13 @@ package se02.task2_4.goods;
 import se02.task2_4.Color;
 import se02.task2_4.Stationery;
 
-public class Pen extends Stationery {
+public class Pen extends WritingAccessories {
 
-	public Pen(int cost, String manufacturer, Color color, int count) {
+	private String inkColor;
 
-		super(cost, manufacturer, color, count);
+	public Pen(int cost, String manufacturer, Color color, int count, String inkColor) {
+
+		super(cost, manufacturer, color, count, inkColor);
 	}
 
 
