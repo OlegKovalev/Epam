@@ -2,8 +2,6 @@ package se02.task5;
 
 import org.junit.*;
 
-import static org.junit.Assert.assertEquals;
-
 public class JournalTest {
 
     Journal journal;

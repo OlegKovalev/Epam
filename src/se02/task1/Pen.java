@@ -25,14 +25,9 @@ public class Pen {
         if (price != pen.price) {
             return false;
         }
-        if (null == manufacturer) {
-            return (manufacturer == pen.manufacturer);
-        } else {
-            if (!manufacturer.equals(pen.manufacturer)) {
-                return false;
-            }
+        if (!manufacturer.equals(pen.manufacturer)) {
+            return false;
         }
-
         return true;
     }
 
