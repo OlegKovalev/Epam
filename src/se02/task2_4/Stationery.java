@@ -1,5 +1,7 @@
 package se02.task2_4;
 
+import se02.task2_4.properties.Color;
+
 public abstract class Stationery {
 
     private int cost;
@@ -98,7 +100,6 @@ public abstract class Stationery {
         return getClass().getSimpleName() + ": " + "cost: " + getCost() + ", manufacturer: " + getManufacturer() +
                 ", color: " + getColor() + ", count: " + getCount() + "\n";
     }
-
 
     public abstract String getName();
 }

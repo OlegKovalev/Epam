@@ -9,11 +9,15 @@ public class Employee {
 
     public Employee() {
 
-        this.stationers = new ArrayList<Stationery>();
+        this.stationers = new ArrayList<>();
     }
 
     public ArrayList<Stationery> getStationers() {
-        return stationers;
+        ArrayList<Stationery> clone = new ArrayList<>();
+        clone.addAll(stationers);
+        return clone;
+//        return new ArrayList<>(stationers);
+//        return stationers;
     }
 
     public void setStationers(ArrayList<Stationery> stationers) {
@@ -44,7 +48,7 @@ public class Employee {
 
     public void printCollection() {
 
-        Iterator iterator = this.stationers.iterator();
+        Iterator iterator = this.getStationers().iterator();
 
         while (iterator.hasNext()) {
             System.out.print(iterator.next());

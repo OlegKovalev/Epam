@@ -1,6 +1,6 @@
 package se02.task2_4.goods;
 
-import se02.task2_4.Color;
+import se02.task2_4.properties.Color;
 import se02.task2_4.Stationery;
 import se02.task2_4.properties.PaperSize;
 

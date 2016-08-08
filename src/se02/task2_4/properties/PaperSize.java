@@ -9,7 +9,6 @@ public enum PaperSize {
     A5("148×210"),
     A6("105×148");
 
-
     private String size;
 
     PaperSize(String size) {
