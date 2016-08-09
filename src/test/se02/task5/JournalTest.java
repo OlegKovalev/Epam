@@ -19,7 +19,7 @@ public class JournalTest {
 
     @Test
     public void getStudents() throws Exception {
-
+        journal.getStudents().get(0).addSubject(new Group(Subject.HISTORY, 3.7));
     }
 
     @Test

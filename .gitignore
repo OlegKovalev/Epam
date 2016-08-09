@@ -4,4 +4,4 @@ out/production/Epam/se01/Note.class
 *.iml
 .idea/workspace (3).xml
 *.xml
-.idea/.name
+.idea/*

@@ -8,7 +8,6 @@ public abstract class Stationery {
     private String manufacturer;
     private Color color;
     private int count;
-    private boolean aBoolean;
 
     public Stationery() {
 
@@ -26,41 +25,41 @@ public abstract class Stationery {
 
         return cost;
     }
-
-    public void setCost(int cost) {
+//Сеттеры, скорее всего не нужны, т.к. в конструкторе всё задаём
+    /*   public void setCost(int cost) {
 
         this.cost = cost;
-    }
+    }*/
 
     public String getManufacturer() {
 
         return manufacturer;
     }
 
-    public void setManufacturer(String manufacturer) {
+    /*public void setManufacturer(String manufacturer) {
 
         this.manufacturer = manufacturer;
-    }
+    }*/
 
     public Color getColor() {
 
         return color;
     }
 
-    public void setColor(Color color) {
+    /* public void setColor(Color color) {
 
         this.color = color;
-    }
+    }*/
 
     public int getCount() {
 
         return count;
     }
 
-    public void setCount(int count) {
+    /*   public void setCount(int count) {
 
         this.count = count;
-    }
+    }*/
 
     public boolean equals(Object obj) {
 
@@ -71,7 +70,7 @@ public abstract class Stationery {
             return false;
         }
         if (getClass() != obj.getClass()) {
-            return aBoolean;
+            return false;
         }
 
         Stationery stationery = (Stationery) obj;
