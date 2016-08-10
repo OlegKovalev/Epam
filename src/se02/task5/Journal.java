@@ -32,6 +32,7 @@ public class Journal {
         return new ArrayList<>();
     }
 
+
     public void printStudents(){
         this.students.forEach(System.out::println);
     }
