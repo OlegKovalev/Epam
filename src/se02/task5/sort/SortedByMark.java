@@ -10,7 +10,7 @@ public class SortedByMark implements Comparator<Group> {
     public int compare(Group first, Group second){
 
         double mark1 = compareValues(first.getMark());
-        double mark2 = compareValues(first.getMark());
+        double mark2 = compareValues(second.getMark());
 
         if (mark1 > mark2) {
             return 1;

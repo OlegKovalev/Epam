@@ -19,7 +19,7 @@ public class JournalTest {
 
     @Test
     public void getStudents() throws Exception {
-        journal.getStudents().get(0).addSubject(new Group(Subject.HISTORY, 3.7));
+//        journal.getStudents().get(0).addSubject(new Group(Subject.HISTORY, 3.7));
     }
 
     @Test
@@ -35,6 +35,12 @@ public class JournalTest {
         System.out.println("----------------------------");
         journal.printStudents();
 
+    }
+
+    @Test
+    public void getSortedGroups(){
+        System.out.println("----------------------------");
+        System.out.println("student3 after sort: \n" + journal.getSortedGroups("student3"));
     }
 
 }
