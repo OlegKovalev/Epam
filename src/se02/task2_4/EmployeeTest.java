@@ -41,15 +41,4 @@ public class EmployeeTest {
         employee.printCollection();
 
     }
-
-/*	public Stationery() {
-        this(0, "none", Color.BLACK, 0);
-	}
-
-	public Stationery(int cost, String manufacturer, Color color, int count) {
-		this.cost = cost;
-		this.manufacturer = manufacturer;
-		this.color = color;
-		this.count = count;
-	}*/
 }
