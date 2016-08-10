@@ -19,7 +19,6 @@ public class JournalTest {
 
     @Test
     public void getStudents() throws Exception {
-//        journal.getStudents().get(0).addSubject(new Group(Subject.HISTORY, 3.7));
     }
 
     @Test
@@ -44,3 +43,25 @@ public class JournalTest {
     }
 
 }
+
+/*
+        ----------------------------
+        student1:
+        [English: 4.2, Geography: 3]
+        student3:
+        [Math: 4.7, History: 5, Geography: 4, English: 4.4]
+        ----------------------------
+        student1:
+        [English: 4.2, Geography: 3]
+        student2:
+        [History: 4, Geography: 4]
+        student3:
+        [Math: 4.7, History: 5, Geography: 4, English: 4.4]
+        student4:
+        [Math: 3.4, English: 3.6]
+        student5:
+        [English: 4.2, Geography: 3]
+        ----------------------------
+        student3 after sort:
+        [Geography: 4, English: 4.4, Math: 4.7, History: 5]
+*/
