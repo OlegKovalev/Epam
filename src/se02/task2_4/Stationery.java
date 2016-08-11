@@ -1,6 +1,6 @@
 package se02.task2_4;
 
-import se02.task2_4.properties.Color;
+import se02.task2_4.good.property.Color;
 
 public abstract class Stationery {
 
