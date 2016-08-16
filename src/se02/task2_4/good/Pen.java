@@ -1,6 +1,6 @@
-package se02.task2_4.goods;
+package se02.task2_4.good;
 
-import se02.task2_4.properties.Color;
+import se02.task2_4.good.property.Color;
 
 public class Pen extends WritingAccessories {
 

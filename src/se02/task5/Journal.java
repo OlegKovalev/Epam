@@ -1,7 +1,10 @@
 package se02.task5;
 
+import se02.task5.sort.SortedByMark;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Journal {
 
@@ -30,6 +33,12 @@ public class Journal {
             }
         }
         return new ArrayList<>();
+    }
+
+    public ArrayList<Group> getSortedGroups(String name){
+        ArrayList<Group>  temp = this.getGroups(name);
+        Collections.sort(temp, new SortedByMark());
+        return temp;
     }
 
     public void printStudents(){

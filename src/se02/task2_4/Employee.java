@@ -14,11 +14,7 @@ public class Employee {
     }
 
     public ArrayList<Stationery> getStationers() {
-        ArrayList<Stationery> clone = new ArrayList<>();
-        clone.addAll(stationers);
-        return clone;
-//        return new ArrayList<>(stationers);
-//        return stationers;
+        return stationers;
     }
 
     public void setStationers(ArrayList<Stationery> stationers) {

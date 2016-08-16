@@ -1,4 +1,4 @@
-package se02.task2_4.properties;
+package se02.task2_4.good.property;
 
 public enum Color {
 
