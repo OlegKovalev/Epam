@@ -1,4 +1,4 @@
-package UniqueCharacter;
+package uniqueCharacter;
 
 import java.util.HashMap;
 import java.util.HashSet;
