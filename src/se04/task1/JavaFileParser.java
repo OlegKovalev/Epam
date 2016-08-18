@@ -45,7 +45,8 @@ public class JavaFileParser {
     public void findKeyWords(List<String> lines) {
 
         for (String line : lines) {
-            String[] tokens = line.split(" ");
+            line.trim();
+            String[] tokens = line.split("[\\s\\\\(]");
             for (String followWord : tokens) {
                 if (KeyWords.KEYWORDS.contains(followWord)) {
                     put(followWord);

@@ -43,7 +43,8 @@ public class JavaFileParserStream {
     public void findKeyWords(List<String> lines) {
 
         for (String line : lines) {
-            String[] tokens = line.split(" ");
+            line.trim();
+            String[] tokens = line.split("[\\s\\\\(]");
             for (String followWord : tokens) {
                 if (KeyWords.KEYWORDS.contains(followWord)) {
                     put(followWord);
@@ -79,6 +80,7 @@ public class JavaFileParserStream {
                 lineToWrite = key + " " + indexMap.get(key);
                 bw.write(lineToWrite);
                 bw.newLine();
+                bw.flush();
             }
         } catch (FileNotFoundException exc) {
             exc.printStackTrace();
