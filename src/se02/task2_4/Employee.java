@@ -28,7 +28,7 @@ public class Employee {
     }
 
     public void removeStatoinery(int index) throws InvalidValue {
-        if(index < 0 || index > stationers.size()-1){
+        if (index < 0 || index > stationers.size() - 1) {
             throw new InvalidValue();
         } else {
             stationers.remove(index);

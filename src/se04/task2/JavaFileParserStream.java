@@ -1,4 +1,4 @@
-package se04.task1;
+package se04.task2;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JavaFileParser {
+public class JavaFileParserStream {
 
     private Map<String, Integer> indexMap;
     private String sourceFilePath;
     private String outputFilePath;
 
-    public JavaFileParser(String sourceFilePath, String outputFilePath) {
+    public JavaFileParserStream(String sourceFilePath, String outputFilePath) {
         this.indexMap = new HashMap<>();
         this.sourceFilePath = sourceFilePath;
         this.outputFilePath = outputFilePath;
@@ -26,13 +26,11 @@ public class JavaFileParser {
 
         List<String> lines = new ArrayList<>();
 
-        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(sourceFilePath))) {
-            byte[] buffer = new byte[2048];
-            int character;
-            String test = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(sourceFilePath))) {
+            String line;
 
-            while ((character = bis.read(buffer)) != -1) {
-                lines.add(new String(buffer, 0, character));
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
             }
         } catch (FileNotFoundException exc) {
             exc.printStackTrace();
@@ -74,12 +72,13 @@ public class JavaFileParser {
 
         findKeyWords(getFile());
 
-        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputFilePath))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputFilePath))) {
             String lineToWrite;
 
             for (String key : indexMap.keySet()) {
-                lineToWrite = key + " " + indexMap.get(key) + "\n";
-                bos.write(lineToWrite.getBytes());
+                lineToWrite = key + " " + indexMap.get(key);
+                bw.write(lineToWrite);
+                bw.newLine();
             }
         } catch (FileNotFoundException exc) {
             exc.printStackTrace();

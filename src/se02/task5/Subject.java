@@ -18,7 +18,7 @@ public enum Subject {
         return classType;
     }
 
-    public String getNameOfSubject(){
+    public String getNameOfSubject() {
         return nameOfSubject;
     }
 }

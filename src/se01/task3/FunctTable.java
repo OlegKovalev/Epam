@@ -2,29 +2,29 @@ package se01.task3;
 
 public class FunctTable {
 
-	private double step, left, right;
+    private double step, left, right;
 
-	FunctTable(double st, double a, double b){
-		step = st;
-		left = a;
-		right = b;
-	}
+    FunctTable(double st, double a, double b) {
+        step = st;
+        left = a;
+        right = b;
+    }
 
-	public void go(){
+    public static void main(String[] args) {
+        new FunctTable(0.2, -7.4, 10).go();
+    }
 
-		double tmp = Math.abs(left);
+    public void go() {
 
-		System.out.println("    x  |  F(x)");
-		System.out.println("   -----------");
+        double tmp = Math.abs(left);
 
-		while(tmp <= right){
+        System.out.println("    x  |  F(x)");
+        System.out.println("   -----------");
 
-			System.out.printf("%6.1f |%6.2f%n", tmp, (Math.tan(2 * tmp)-3));
-			tmp += step;
-		}
-	}
+        while (tmp <= right) {
 
-	public static void main(String[] args){
-		new FunctTable(0.2,-7.4,10).go();
-	}
+            System.out.printf("%6.1f |%6.2f%n", tmp, (Math.tan(2 * tmp) - 3));
+            tmp += step;
+        }
+    }
 }

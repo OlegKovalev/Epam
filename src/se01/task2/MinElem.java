@@ -5,35 +5,35 @@ import java.util.Scanner;
 
 public class MinElem {
 
-	public static void main(String[] args){
+    public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
-		//без локали точка в разделителе не работает
-		sc.useLocale(new Locale("US"));
+        Scanner sc = new Scanner(System.in);
+        //без локали точка в разделителе не работает
+        sc.useLocale(new Locale("US"));
 
-		System.out.println("Insert number: ");
-		new MinElem().go(sc.nextDouble());
+        System.out.println("Insert number: ");
+        new MinElem().go(sc.nextDouble());
 
-	}
+    }
 
-	public void go(double num){
+    public void go(double num) {
 
-		if(num > 1){
-			System.out.println("Number should be less than 1.");
-			System.exit(0);
-		}
-		double a;
+        if (num > 1) {
+            System.out.println("Number should be less than 1.");
+            System.exit(0);
+        }
+        double a;
 
-		for(int i=0;;i++){
-			a = 1/Math.pow(i + 1, 2);
+        for (int i = 0; ; i++) {
+            a = 1 / Math.pow(i + 1, 2);
 
-			if(a < num){
-				System.out.println("Index of min element: " + i);
-				break;
-			}
-			System.out.println(a);
-		}
-	}
+            if (a < num) {
+                System.out.println("Index of min element: " + i);
+                break;
+            }
+            System.out.println(a);
+        }
+    }
 }
 
 

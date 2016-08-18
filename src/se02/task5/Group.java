@@ -8,7 +8,7 @@ public class Group<T extends Number> {
     public Group(Subject subject, T mark) {
         this.subject = subject;
 
-        if(mark.getClass() != subject.getClassType()){
+        if (mark.getClass() != subject.getClassType()) {
             throw new ClassCastException("Incorrect type of mark!");
         }
         this.mark = mark;
@@ -31,7 +31,7 @@ public class Group<T extends Number> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return subject.getNameOfSubject() + ": " + getMark();
     }
 }

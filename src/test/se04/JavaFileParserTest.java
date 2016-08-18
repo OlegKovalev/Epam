@@ -2,18 +2,15 @@ package se04;
 
 import org.junit.Before;
 import org.junit.Test;
-import se04.task1.JavaFileParser;
-
-import java.util.List;
-import java.util.Map;
+import se04.task1.JavaFileParserStream;
 
 public class JavaFileParserTest {
 
-    JavaFileParser parser;
+    JavaFileParserStream parser;
 
     @Before
     public void init() throws Exception {
-        parser = new JavaFileParser("./src/se04/task1/resource/FileForExample",
+        parser = new JavaFileParserStream("./src/se04/task1/resource/FileForExample",
                 "./src/se04/task1/resource/OutputFile");
     }
 

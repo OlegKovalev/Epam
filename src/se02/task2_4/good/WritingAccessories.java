@@ -1,7 +1,7 @@
 package se02.task2_4.good;
 
-import se02.task2_4.good.property.Color;
 import se02.task2_4.Stationery;
+import se02.task2_4.good.property.Color;
 
 public abstract class WritingAccessories extends Stationery {
 

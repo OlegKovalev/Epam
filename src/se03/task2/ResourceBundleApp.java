@@ -5,8 +5,8 @@ import java.util.ResourceBundle;
 
 public class ResourceBundleApp {
 
-    private ResourceBundle bundle;
     private final String PATH_TO_PROPERTIES = "se03.task2.question";
+    private ResourceBundle bundle;
 
     public ResourceBundleApp() {
         bundle = ResourceBundle.getBundle(PATH_TO_PROPERTIES, Locale.getDefault());

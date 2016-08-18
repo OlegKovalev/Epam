@@ -7,7 +7,7 @@ import java.util.Comparator;
 public class SortedByMark implements Comparator<Group> {
 
     @Override
-    public int compare(Group first, Group second){
+    public int compare(Group first, Group second) {
 
         double mark1 = compareValues(first.getMark());
         double mark2 = compareValues(second.getMark());
@@ -21,11 +21,11 @@ public class SortedByMark implements Comparator<Group> {
         }
     }
 
-    public double compareValues(Number number){
-        if(number.getClass() == Double.class){
+    public double compareValues(Number number) {
+        if (number.getClass() == Double.class) {
             return number.doubleValue();
         } else {
-            if(number.getClass() == Integer.class){
+            if (number.getClass() == Integer.class) {
                 return (double) number.intValue();
             } else {
                 throw new TypeNotPresentException("Incorrect type of mark!", new Throwable());

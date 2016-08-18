@@ -23,7 +23,7 @@ public class NuclearBoat {
         this.nameOfBoat = nameOfBoat;
     }
 
-    public void setsSail(){
+    public void setsSail() {
         EngineOfNuclearBoat engine = new EngineOfNuclearBoat();
         engine.go();
     }

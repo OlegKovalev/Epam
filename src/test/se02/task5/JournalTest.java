@@ -1,10 +1,12 @@
 package se02.task5;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
 public class JournalTest {
 
     Journal journal;
+
     @Before
     public void setUp() throws Exception {
         journal = new Journal(
@@ -25,8 +27,8 @@ public class JournalTest {
     @Test
     public void getGroups() throws Exception {
         System.out.println("----------------------------");
-        System.out.println("student1: \n"+ journal.getGroups("student1"));
-        System.out.println("student3: \n"+ journal.getGroups("student3"));
+        System.out.println("student1: \n" + journal.getGroups("student1"));
+        System.out.println("student3: \n" + journal.getGroups("student3"));
 
     }
 

@@ -8,7 +8,7 @@ public class Student {
     private String name;
     private ArrayList<Group> groups;
 
-    public Student(String name){
+    public Student(String name) {
         this(name, new ArrayList<>());
     }
 
@@ -17,7 +17,7 @@ public class Student {
         this.groups = groups;
     }
 
-    public Student(String name, Group ... groups) {
+    public Student(String name, Group... groups) {
         this(name, new ArrayList<>(Arrays.asList(groups)));
     }
 
@@ -37,14 +37,14 @@ public class Student {
         this.groups = groups;
     }
 
-    public void addSubject(Group subject){
-        if(!groups.contains(subject)) {
+    public void addSubject(Group subject) {
+        if (!groups.contains(subject)) {
             groups.add(subject);
         }
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name + ":\n" + groups;
     }
 }
