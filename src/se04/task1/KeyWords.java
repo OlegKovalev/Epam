@@ -1,4 +1,4 @@
-package se04;
+package se04.task1;
 
 import java.util.Arrays;
 import java.util.HashSet;
