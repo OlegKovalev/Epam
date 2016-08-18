@@ -9,12 +9,14 @@ import java.util.Map;
 public class JavaFileParser {
 
     private Map<String, Integer> indexMap;
-    private String filePath;
+    private String sourceFilePath;
+    private String outputFilePath;
     private static final byte DELIMITER = (byte) '\n';
 
-    public JavaFileParser(String filePath) {
+    public JavaFileParser(String sourceFilePath, String outputFilePath) {
         this.indexMap = new HashMap<>();
-        this.filePath = filePath;
+        this.sourceFilePath = sourceFilePath;
+        this.outputFilePath = outputFilePath;
     }
 
     public Map<String, Integer> getIndexMap() {
@@ -24,9 +26,7 @@ public class JavaFileParser {
     public List<String> getFile() {
         List<String> lines = new ArrayList<>();
 
-        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(filePath))) {
-
-            ByteArrayOutputStream outString = new ByteArrayOutputStream();
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(sourceFilePath))) {
 
             byte[] buffer = new byte[2048];
             int character;
@@ -66,6 +66,21 @@ public class JavaFileParser {
             indexMap.put(word, ++count);
         } else {
             indexMap.put(word, 1);
+        }
+    }
+
+    public void writeInFile(Map<String, Integer> mapOfKeyWords) {
+        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputFilePath))) {
+            String lineToWrite;
+
+            for (String key : indexMap.keySet()){
+                lineToWrite = key + indexMap.get(key);
+                bos.write(lineToWrite.getBytes());
+            }
+        } catch (FileNotFoundException exc) {
+            exc.printStackTrace();
+        } catch (IOException exc) {
+            exc.printStackTrace();
         }
     }
 }
