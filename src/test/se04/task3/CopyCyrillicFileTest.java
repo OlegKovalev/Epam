@@ -12,7 +12,7 @@ public class CopyCyrillicFileTest {
     
     CopyCyrillicFile copy;
     String sourcePath = "./src/se04/task3/resource/sourceFile_UTF-8.txt";
-    String targetPath = "./src/se03/task3/resource/targetFile_UTF-8.txt";
+    String targetPath = "./src/se04/task3/resource/targetFile_UTF-16.txt";
 
     @Before
     public void setUp() throws Exception {
