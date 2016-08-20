@@ -19,7 +19,7 @@ public class HtmlParserTest {
     /*@Test
     public void readFile() throws Exception {
         System.out.println("Full file:");
-        ArrayList<String> lines = parser.readFile(filePath);
+        ArrayList<String> lines = parser.readSourceFile(filePath);
         lines.forEach(System.out::println);
     }*/
 

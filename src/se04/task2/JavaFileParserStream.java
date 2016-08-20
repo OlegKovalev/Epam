@@ -80,7 +80,6 @@ public class JavaFileParserStream {
                 lineToWrite = key + " " + indexMap.get(key);
                 bw.write(lineToWrite);
                 bw.newLine();
-                bw.flush();
             }
         } catch (FileNotFoundException exc) {
             exc.printStackTrace();
