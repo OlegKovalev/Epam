@@ -1,6 +1,8 @@
 package se04.task4;
 
-public class Actor {
+import java.io.Serializable;
+
+public class Actor implements Serializable {
 
     private String name;
     private String surname;

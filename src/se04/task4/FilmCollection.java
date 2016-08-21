@@ -3,9 +3,9 @@ package se04.task4;
 import java.io.*;
 import java.util.ArrayList;
 
-public class FilmCollection {
+public class FilmCollection implements Serializable {
 
-    public static final String fileName = "./src/se04/task4/resource/films.ser";
+    public static final String fileName = "E:\\GitHub\\Epam\\src\\se04\\resources\\task4\\films.ser";
 
 
     private ArrayList<Film> filmsList = new ArrayList<>();
@@ -25,11 +25,13 @@ public class FilmCollection {
     public void restoreFilmCollection() {
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
-            filmsList = (ArrayList<Film>) ois.readObject();
+            if (ois.available() > 0) {
+                filmsList = (ArrayList<Film>) ois.readObject();
+            }
         } catch (ClassNotFoundException exc) {
             System.out.println("File not found!");
         } catch (IOException exc) {
-            System.out.println("Write file exception!");
+            System.out.println("Read file exception!");
         }
     }
 
@@ -45,5 +47,9 @@ public class FilmCollection {
 
     public void addFilm(Film film) {
         filmsList.add(film);
+    }
+
+    public void removeAll() {
+        filmsList.clear();
     }
 }

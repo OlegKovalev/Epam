@@ -1,6 +1,7 @@
 package se04.task4;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -20,6 +21,7 @@ public class FilmCollectionTest {
         films.addFilm(new Film("Lock, Stock and Two Smoking Barrels", new Actor("Jason","Flemyng"), new Actor("Dexter","Fletcher"), new Actor("Nick","Moran")));
         films.addFilm(new Film("Snatch", new Actor("Benicio","del Toro"), new Actor("Dennis","Farina"), new Actor("Alan","Ford")));
         assertEquals(3,films.getFilmsList().size());
+//        films.saveFilmCollection();
     }
 
     @Test
@@ -29,12 +31,17 @@ public class FilmCollectionTest {
 
     @Test
     public void restoreFilmCollection() throws Exception {
+        films.saveFilmCollection();
+        films.removeAll();
+        assertEquals(0,films.getFilmsList().size());
 
     }
 
     @Test
     public void getFilmsList() throws Exception {
-
+        films.removeAll();
+        films.restoreFilmCollection();
+        assertEquals(3,films.getFilmsList().size());
     }
 
     @Test
