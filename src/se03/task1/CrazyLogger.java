@@ -31,7 +31,7 @@ public class CrazyLogger {
             exc.printStackTrace();
         } finally {
             try {
-                if(inStream != null) {
+                if (inStream != null) {
                     inStream.close();
                 }
             } catch (IOException exc) {
@@ -40,7 +40,7 @@ public class CrazyLogger {
         }
     }
 
-    public OutputStream findInfo(String msg, OutputStream outStream) {
+    public void findInfo(String msg, OutputStream outStream) {
         String[] lines = getLogger().split("\n");
 
         try {
@@ -52,7 +52,14 @@ public class CrazyLogger {
             outStream.flush();
         } catch (IOException exc) {
             exc.printStackTrace();
+        } finally {
+            try {
+                if (outStream != null) {
+                    outStream.close();
+                }
+            } catch (IOException exc) {
+                exc.printStackTrace();
+            }
         }
-        return outStream;
     }
 }
