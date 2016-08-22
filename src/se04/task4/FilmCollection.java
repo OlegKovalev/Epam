@@ -16,6 +16,7 @@ public class FilmCollection implements Serializable {
             File file = new File(fileName);
             if (file.createNewFile()) {
                 oos.writeObject(filmsList);
+                oos.flush();
             }
         } catch (IOException exc) {
             System.out.println("Write file exception!");

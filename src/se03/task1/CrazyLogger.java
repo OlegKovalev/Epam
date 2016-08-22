@@ -29,6 +29,14 @@ public class CrazyLogger {
             addInformation(inStream.read());
         } catch (IOException exc) {
             exc.printStackTrace();
+        } finally {
+            try {
+                if(inStream != null) {
+                    inStream.close();
+                }
+            } catch (IOException exc) {
+                exc.printStackTrace();
+            }
         }
     }
 

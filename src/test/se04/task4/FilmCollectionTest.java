@@ -27,6 +27,7 @@ public class FilmCollectionTest {
     @Test
     public void saveFilmCollection() throws Exception {
         films.saveFilmCollection();
+        assertEquals(3,films.getFilmsList().size());
     }
 
     @Test
