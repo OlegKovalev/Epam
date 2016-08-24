@@ -14,10 +14,9 @@ public class FilmCollection implements Serializable {
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
             File file = new File(fileName);
-            if (file.createNewFile()) {
-                oos.writeObject(filmsList);
-                oos.flush();
-            }
+            oos.writeObject(filmsList);
+            oos.flush();
+
         } catch (IOException exc) {
             System.out.println("Write file exception!");
         }
@@ -26,9 +25,7 @@ public class FilmCollection implements Serializable {
     public void restoreFilmCollection() {
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
-            if (ois.available() > 0) {
-                filmsList = (ArrayList<Film>) ois.readObject();
-            }
+            filmsList = (ArrayList<Film>) ois.readObject();
         } catch (ClassNotFoundException exc) {
             System.out.println("File not found!");
         } catch (IOException exc) {
@@ -54,3 +51,11 @@ public class FilmCollection implements Serializable {
         filmsList.clear();
     }
 }
+
+/*available() returns an estimation of the number of bytes that can be read without blocking. 
+            The base InputStream implementation always returns 0, because this is a valid estimation. 
+            But whatever it returns, the fact that it returns 0 doesn't mean that there is nothing to read anymore. 
+            Only that the stream can't guarantee that at least one byte can be read without blocking.*/
+//            if (ois.available() > 0) {
+//              ois.readObject();
+//            }

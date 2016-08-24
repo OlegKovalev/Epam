@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class HtmlParserTest {
 
     HtmlParser parser;
-    String filePath = "./src/se03/task3/HTML_file.html";
+    String filePath = "./src/se03/resources/task3/HTML_file.html";
 
     @Before
     public void setUp() throws Exception {

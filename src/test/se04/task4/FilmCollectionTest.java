@@ -4,12 +4,13 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
 
-public class FilmCollectionTest {
+public class FilmCollectionTest implements Serializable {
     
     FilmCollection films;
     
@@ -21,7 +22,7 @@ public class FilmCollectionTest {
         films.addFilm(new Film("Lock, Stock and Two Smoking Barrels", new Actor("Jason","Flemyng"), new Actor("Dexter","Fletcher"), new Actor("Nick","Moran")));
         films.addFilm(new Film("Snatch", new Actor("Benicio","del Toro"), new Actor("Dennis","Farina"), new Actor("Alan","Ford")));
         assertEquals(3,films.getFilmsList().size());
-//        films.saveFilmCollection();
+        films.saveFilmCollection();
     }
 
     @Test

@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class HtmlParser {
 
-    private static final Pattern REFERENCE_IMG_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+).*)<");
+    private static final Pattern REFERENCE_IMG_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+).*)");
 
     public ArrayList<String> readFile(String fileName) {
 
