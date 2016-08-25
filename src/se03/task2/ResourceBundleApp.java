@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 public class ResourceBundleApp {
 
-    private final String PATH_TO_PROPERTIES = "se03.task2.question";
+    private final String PATH_TO_PROPERTIES = "se03.resources.task2.question";
     private ResourceBundle bundle;
 
     public ResourceBundleApp() {
