@@ -39,7 +39,8 @@ public class HtmlParser {
             Matcher matcher = REFERENCE_IMG_PATTERN.matcher(line);
             
             line = line.trim();
-            line = line.replaceAll("\\([Рис].*\\)", ""); 
+//            line = line.replaceAll("\\([Рис].*\\)", ""); 
+            line = line.replaceAll("[Рис. ]\\d+", ""); 
 
             if (matcher.find()) {
                 matcher = REFERENCE_COMPLETE_IMG_SENTENCE_PATTERN.matcher(line);
@@ -50,7 +51,7 @@ public class HtmlParser {
                     isCompleteSentence = false;
                 }
             } else {
-                //Если это третья строка подряд без точки, то она не заходит в else()...
+                //Если это третья строка подряд без точки, то она не заходит в else()
                 if (!isCompleteSentence) {
                     String[] tokens = line.split("\\.");
 
@@ -97,8 +98,8 @@ public class HtmlParser {
         ArrayList<String> convertedSentences = new ArrayList<>();
         
         for(String line : lines){
-            line = line.replaceAll("&nbsp;", "");
-            line = line.replaceAll("(<.*>)?", "");
+            line = line.replace("&nbsp;", "");
+            line = line.replaceAll("</?[a-z]*>", "");
             convertedSentences.add(line);
         }
         

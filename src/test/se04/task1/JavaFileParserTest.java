@@ -10,8 +10,8 @@ public class JavaFileParserTest {
 
     @Before
     public void init() throws Exception {
-        parser = new JavaFileParser("./src/se04/task1/resource/FileForExample",
-                "./src/se04/task1/resource/OutputFile");
+        parser = new JavaFileParser("./src/se04/resources/task1/FileForExample",
+                "./src/se04/resources/task1/OutputFile");
     }
 
     @Test
