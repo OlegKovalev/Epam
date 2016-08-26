@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 public class HtmlParser {
 
-    private static final Pattern REFERENCE_IMG_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+).*)");
-    private static final Pattern REFERENCE_COMPLETE_IMG_SENTENCE_PATTERN = Pattern.compile("(([Рр]ис\\.\\s?(\\d+).*\\.).*)");
+    private static final Pattern REFERENCE_IMG_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+\\.?))");
+    private static final Pattern REFERENCE_COMPLETE_IMG_SENTENCE_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+).*?\\.)");
 
     public ArrayList<String> readFile(String fileName) {
 
@@ -36,42 +36,46 @@ public class HtmlParser {
 
         for (String line : lines) {
 
-            Matcher matcher = REFERENCE_IMG_PATTERN.matcher(line);
-            
             line = line.trim();
-//            line = line.replaceAll("\\([Рис].*\\)", ""); 
-            line = line.replaceAll("[Рис. ]\\d+", ""); 
+            line = line.replaceAll("\\(Рис.*\\)", "");
+
+            Matcher matcher = REFERENCE_IMG_PATTERN.matcher(line);
 
             if (matcher.find()) {
+                //this is only for 16th line with pic 
+                if (matcher.group(2).contains(".")) {
+                    int dotPos = matcher.end(2);
+                    line = line.substring(0, dotPos - 1) + line.substring(dotPos);
+                }
+
                 matcher = REFERENCE_COMPLETE_IMG_SENTENCE_PATTERN.matcher(line);
                 if (matcher.find()) {
-                    sourceLines.add(matcher.group(2));
+                    sourceLines.add(matcher.group(1));
                 } else {
-                    tempLine = line;
+                    tempLine = line + " ";
                     isCompleteSentence = false;
                 }
             } else {
-                //Если это третья строка подряд без точки, то она не заходит в else()
                 if (!isCompleteSentence) {
                     String[] tokens = line.split("\\.");
 
-                    if (tokens.length == 0) {
-                        tempLine += line;
-                    } else { 
-                        if (tokens.length == 1){
-                              tempLine += tokens[0];
+                    if (tokens[0].equals(line)) {
+                        tempLine += line + " ";
+                    } else {
+                        tempLine += tokens[0];
+                        if (!tempLine.endsWith("\\.")) {
+                            tempLine += ".";
+                        }
                         sourceLines.add(tempLine);
                         tempLine = "";
-                        isCompleteSentence = true;   
-                        }
-                   
+                        isCompleteSentence = true;
                     }
                 }
             }
         }
         return cleanSentences(sourceLines);
     }
-    
+
     public boolean isSuccessivelyLink(String fileName) {
 
         Matcher matcher;
@@ -93,16 +97,16 @@ public class HtmlParser {
         }
         return true;
     }
-    
+
     private ArrayList<String> cleanSentences(ArrayList<String> lines) {
         ArrayList<String> convertedSentences = new ArrayList<>();
-        
-        for(String line : lines){
+
+        for (String line : lines) {
             line = line.replace("&nbsp;", "");
             line = line.replaceAll("</?[a-z]*>", "");
             convertedSentences.add(line);
         }
-        
+
         return convertedSentences;
     }
 }
