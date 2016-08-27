@@ -1,14 +1,12 @@
 package statement;
 
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
 
 /**
  * Created by Олег on 16.08.2016.
  */
 public class NamedParameterStatementTest {
+
     @Before
     public void setUp() throws Exception {
 
@@ -16,7 +14,8 @@ public class NamedParameterStatementTest {
 
     @Test
     public void setInt() throws Exception {
-
+        String query = "UPDATE table SET name = :name WHERE id = :id";
+//        NamedParameterStatement statement = new NamedParameterStatement(query);
     }
 
     @Test
