@@ -5,11 +5,13 @@ import java.util.ArrayList;
 
 public class FilmCollection implements Serializable {
 
-//    public static final String fileName = "E:\\GitHub\\Epam\\src\\se04\\resources\\task4\\films.ser";
-    public static final String fileName = "./src/se04/resources/task4/films.ser";
+    private ArrayList<Film> filmsList;
+    private String fileName = "";
 
-
-    private ArrayList<Film> filmsList = new ArrayList<>();
+    public FilmCollection(String fileName) {
+        this.fileName = fileName;
+        filmsList = new ArrayList<>();
+    }
 
     public void saveFilmCollection() {
 

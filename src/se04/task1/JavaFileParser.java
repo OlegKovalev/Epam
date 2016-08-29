@@ -22,27 +22,43 @@ public class JavaFileParser {
         return indexMap;
     }
 
-    public List<String> getFile() {
+    public void findKeyWordsAndWriteInFile() {
+        findKeyWords(getFile());
+
+        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputFilePath))) {
+            String lineToWrite;
+
+            for (String key : indexMap.keySet()) {
+                lineToWrite = key + " " + indexMap.get(key) + "\n";
+                bos.write(lineToWrite.getBytes());
+            }
+        } catch (FileNotFoundException exc) {
+            System.out.println("File not found");
+        } catch (IOException exc) {
+            System.out.println("Exception");
+        }
+    }
+    
+    private List<String> getFile() {
 
         List<String> lines = new ArrayList<>();
 
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(sourceFilePath))) {
             byte[] buffer = new byte[2048];
             int character;
-            String test = "";
 
             while ((character = bis.read(buffer)) != -1) {
                 lines.add(new String(buffer, 0, character));
             }
         } catch (FileNotFoundException exc) {
-            exc.printStackTrace();
+            System.out.println("File not found");
         } catch (IOException exc) {
-            exc.printStackTrace();
+            System.out.println("Exception");
         }
         return lines;
     }
 
-    public void findKeyWords(List<String> lines) {
+    private void findKeyWords(List<String> lines) {
 
         for (String line : lines) {
             line.trim();
@@ -55,37 +71,14 @@ public class JavaFileParser {
         }
     }
 
-    public void put(String word) {
-
+    private void put(String word) {
         int count = 0;
 
         if (indexMap.containsKey(word)) {
-            if (indexMap.get(word) == null) {
-                count = 0;
-            } else {
-                count = indexMap.get(word);
-            }
+            count = indexMap.get(word);
             indexMap.put(word, ++count);
         } else {
             indexMap.put(word, 1);
-        }
-    }
-
-    public void findKeyWordsAndWriteInFile() {
-
-        findKeyWords(getFile());
-
-        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputFilePath))) {
-            String lineToWrite;
-
-            for (String key : indexMap.keySet()) {
-                lineToWrite = key + " " + indexMap.get(key) + "\n";
-                bos.write(lineToWrite.getBytes());
-            }
-        } catch (FileNotFoundException exc) {
-            exc.printStackTrace();
-        } catch (IOException exc) {
-            exc.printStackTrace();
         }
     }
 }

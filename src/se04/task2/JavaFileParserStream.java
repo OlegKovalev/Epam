@@ -22,8 +22,25 @@ public class JavaFileParserStream {
         return indexMap;
     }
 
-    public List<String> getFile() {
+    public void findKeyWordsAndWriteInFile() {
+        findKeyWords(getFile());
 
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputFilePath))) {
+            String lineToWrite;
+
+            for (String key : indexMap.keySet()) {
+                lineToWrite = key + " " + indexMap.get(key);
+                bw.write(lineToWrite);
+                bw.newLine();
+            }
+        } catch (FileNotFoundException exc) {
+            System.out.println("File not found");
+        } catch (IOException exc) {
+            System.out.println("Exception");
+        }
+    }
+    
+    private List<String> getFile() {
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(sourceFilePath))) {
@@ -33,14 +50,14 @@ public class JavaFileParserStream {
                 lines.add(line);
             }
         } catch (FileNotFoundException exc) {
-            exc.printStackTrace();
+            System.out.println("File not found");
         } catch (IOException exc) {
-            exc.printStackTrace();
+            System.out.println("Exception");
         }
         return lines;
     }
 
-    public void findKeyWords(List<String> lines) {
+    private void findKeyWords(List<String> lines) {
 
         for (String line : lines) {
             line.trim();
@@ -53,38 +70,14 @@ public class JavaFileParserStream {
         }
     }
 
-    public void put(String word) {
-
+    private void put(String word) {
         int count = 0;
 
         if (indexMap.containsKey(word)) {
-            if (indexMap.get(word) == null) {
-                count = 0;
-            } else {
                 count = indexMap.get(word);
-            }
             indexMap.put(word, ++count);
         } else {
             indexMap.put(word, 1);
-        }
-    }
-
-    public void findKeyWordsAndWriteInFile() {
-
-        findKeyWords(getFile());
-
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputFilePath))) {
-            String lineToWrite;
-
-            for (String key : indexMap.keySet()) {
-                lineToWrite = key + " " + indexMap.get(key);
-                bw.write(lineToWrite);
-                bw.newLine();
-            }
-        } catch (FileNotFoundException exc) {
-            exc.printStackTrace();
-        } catch (IOException exc) {
-            exc.printStackTrace();
         }
     }
 }
