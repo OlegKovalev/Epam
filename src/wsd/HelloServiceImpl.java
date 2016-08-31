@@ -2,7 +2,7 @@ package wsd;
 
 import javax.jws.WebService;
 
-@WebService(endpointInterface = "src.wsd.HelloService")
+@WebService(endpointInterface = "wsd.HelloService")
 public class HelloServiceImpl implements HelloService {
 
     @Override

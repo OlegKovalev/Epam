@@ -1,5 +1,8 @@
 package se03.task2;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import static java.lang.System.out;
 
 public class ResourceBundleAppTest {

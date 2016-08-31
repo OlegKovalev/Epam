@@ -4,7 +4,7 @@ public class NotebookMain {
 
     public static void main(String[] args) {
 
-        Notebook nb = new Notebook(3);
+        Notebook nb = new Notebook(13);
 
         for (int i = 0; i < 8; i++) {
             nb.addNote("Note " + i);
