@@ -17,7 +17,6 @@ public class HelpOn {
                 "1. open [filename/catalog]\n" +
                 "2. cd [path] - change directory\n" +
                 "3. md [filename] - create new file\n" +
-                "4. del [filename] - delete file\n" +
-                "5. cat [filename] - Print file into console in current directory;\n");
-    }*/
+                "4. del [filename] - delete file\n");
+       }*/
 }

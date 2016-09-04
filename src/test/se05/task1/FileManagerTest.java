@@ -13,7 +13,7 @@ public class FileManagerTest {
     
     @Before
     public void setUp() throws Exception {
-        fileManager = new FileManager("O:\\");
+        fileManager = new FileManager("O:\\test");
     }
 
     @Test

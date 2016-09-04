@@ -26,20 +26,24 @@ public class FileManager {
         ArrayList<String> fileNames;
         Matcher matcher;
         String tmp = null;
-//        try {
+        try {
 
             while (true) {
                 fileDir.printDirectory(currentPath);
                 HelpOn.printHelp();
                 fileNames = new ArrayList<>(Arrays.asList(currentPath.list()));
                 System.out.println("Enter command: ");
-                // тут повисает
+                /*
+                * Вот после вывода повисает
+                * Если убрать ввод, и передать матчеру строку напрямую, то всё работает..
+                * Scanner даёт тот же результат
+                * */
                 try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
                     tmp = br.readLine();
                 } catch (IOException exc) {
                     exc.printStackTrace();
                 }
-
+                
                 matcher = REFERENCE_INPUT_PATTERN.matcher(tmp);
                 if (matcher.find()) {
 //            System.out.println(matcher.group(1));
@@ -70,7 +74,11 @@ public class FileManager {
                             }
                             break;
                         case "back":
-                            currentPath = new File(currentPath.getParent());
+                            if (currentPath.getParent() == null) {
+                                System.out.println("This parent directory.");
+                            } else {
+                                currentPath = new File(currentPath.getParent());
+                            }
                             break;
                         case "cd":
 
@@ -88,9 +96,9 @@ public class FileManager {
                     }
                 }
             }
-//        } catch (RuntimeException exc) {
-//            exc.printStackTrace();
-//        }
+        } catch (RuntimeException exc) {
+            exc.printStackTrace();
+        }
     }
 
     private ArrayList<String> readFile() {

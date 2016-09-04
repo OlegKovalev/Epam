@@ -8,13 +8,13 @@ public class FileDirectory {
 
     public void printDirectory(File currentPath) {
 
-        System.out.printf("%-35s%-10s%-30s%-10s%-13s%-10s\n", "File name", "Size", "Last modified", "Access",
+        System.out.printf("%-55s%-10s%-30s%-10s%-13s%-10s\n", "File name", "Size", "Last modified", "Access",
                 "Enhanced", "Type");
         System.out.println("-------------------------------------------------------------------------------------" +
-                "--------------------");
+                "-------------------------------------");
 
         for (File obj : currentPath.listFiles()) {
-            System.out.printf("%-35s%-10s%-30s%-10s%-13s%-10s\n", obj.getName(), fileSize(obj), lastModifies(obj),
+            System.out.printf("%-55s%-10s%-30s%-10s%-13s%-10s\n", obj.getName(), fileSize(obj), lastModifies(obj),
                     fileAccess(obj), fileEnhanced(obj), fileType(obj));
         }
     }
