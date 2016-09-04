@@ -1,114 +1,125 @@
 package se05.task1;
 
-import java.io.File;
-import java.util.Date;
-import java.util.Formatter;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FileManager {
 
+    FileDirectory fileDir;
     Scanner sc;
+    private static final Pattern REFERENCE_INPUT_PATTERN = Pattern.compile(".*?([a-zA-Z]+)\\s*([a-zA-Z\\\\]*).*");
 
-    private static final String[] columnNames = {"File name", "Size", "Last modified", "Access", "Enhanced", "Type"};
     private File currentPath;
 
-
-    public FileManager(File currentPath) {
-        this.currentPath = currentPath;
+    public FileManager(String Path) {
+        this.currentPath = new File(Path);
+        sc = new Scanner(System.in);
+        fileDir = new FileDirectory();
     }
 
-    
+    void go() {
+//        ArrayList<File> files;
+        ArrayList<String> fileNames;
+        Matcher matcher;
+        String tmp = null;
+//        try {
 
-    private void printDirectory() {
-        for (String colum : columnNames) {
-            System.out.print(colum + "\t");
-        }
-        for (File obj : currentPath.listFiles()) {
-            System.out.printf("%10%6%15%5%5%8n", obj.getName(), fileSize(obj), lastModifies(obj), fileAccess(obj), fileEnhanced(obj), fileType(obj));
-        }
-    }
-
-    private String fileType(File obj) {
-        if (obj.isFile()) {
-            return "File";
-        } else {
-            return "Catalog";
-        }
-    }
-
-    private String fileEnhanced(File file) {
-        if (file.isFile()) {
-            String name = file.getName();
-            if (name.contains(".")) {
-                name = name.substring(name.lastIndexOf('.') + 1, name.length());
-                return name;
-            } else {
-                return "-";
-            }
-        } else {
-            return "-";
-        }
-
-    }
-
-    private String fileAccess(File file) {
-        String access = "";
-        if (file.canRead()) {
-            access += "r";
-        } else {
-            access += "-";
-        }
-        access += "/";
-        if (file.canWrite()) {
-            access += "w";
-        } else {
-            access += "-";
-        }
-        return access;
-    }
-
-    private Formatter lastModifies(File obj) {
-        Date date = new Date(obj.lastModified());
-        Formatter formatter = new Formatter();
-        formatter.format("%tH:%tM:%tS %td %tB %tY", date, date, date, date, date, date);
-        return formatter;
-    }
-
-    private String fileSize(File file) {
-        long size = file.length();
-        String result;
-
-        if (size >= 1024) {
-            if (size >= 1024 * 1024) {
-                if (size >= 1024 * 1024 * 1024) {
-                    if (size >= 1024 * 1024 * 1024 * 1024) {
-                        size = (long) size / 1024;
-                        size = (long) size / 1024;
-                        size = (long) size / 1024;
-                        size = (long) size / 1024;
-                        result = Long.toString(size) + " TB";
-                        return result;
-                    }
-                    size = (long) size / 1024;
-                    size = (long) size / 1024;
-                    size = (long) size / 1024;
-                    result = Long.toString(size) + " GB";
-                    return result;
+            while (true) {
+                fileDir.printDirectory(currentPath);
+                HelpOn.printHelp();
+                fileNames = new ArrayList<>(Arrays.asList(currentPath.list()));
+                System.out.println("Enter command: ");
+                // тут повисает
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+                    tmp = br.readLine();
+                } catch (IOException exc) {
+                    exc.printStackTrace();
                 }
-                size = (long) size / 1024;
-                size = (long) size / 1024;
-                result = Long.toString(size) + " MB";
-                return result;
-            }
-            size = (long) size / 1024;
-            result = Long.toString(size) + " kB";
-        }
-        if (size == -1) {
-            return "";
-        } else {
-            result = Long.toString(size) + " b";
-        }
-        return result;
-    }
-}
 
+                matcher = REFERENCE_INPUT_PATTERN.matcher(tmp);
+                if (matcher.find()) {
+//            System.out.println(matcher.group(1));
+                    switch (matcher.group(1)) {
+                        case "Exit":
+                            System.exit(0);
+                            break;
+                        case "open":
+                            if (fileNames.contains(matcher.group(2))) {
+                                String tempPath = currentPath.getAbsolutePath() + matcher.group(1);
+                                currentPath = new File(tempPath);
+
+                                if (currentPath.isFile()) {
+                                    readFile().forEach(System.out::println);
+
+                                    System.out.print("Enter sentence for write. Enter dot '.' to finish.");
+                                    String writeLine = sc.next();
+
+                                    if (writeLine.contains(".")) {
+                                        String[] tokens = writeLine.split("\\.");
+                                        writeFile(tokens[0] + ".\n");
+                                    }
+                                } else {
+                                    System.out.println("Move to " + tempPath);
+                                }
+                            } else {
+                                System.out.println("File not found!");
+                            }
+                            break;
+                        case "back":
+                            currentPath = new File(currentPath.getParent());
+                            break;
+                        case "cd":
+
+                            break;
+                        case "md":
+
+                            break;
+                        case "del":
+
+                            break;
+                        default:
+                            System.out.println("Wrong command!");
+                            HelpOn.printHelp();
+                            break;
+                    }
+                }
+            }
+//        } catch (RuntimeException exc) {
+//            exc.printStackTrace();
+//        }
+    }
+
+    private ArrayList<String> readFile() {
+        ArrayList<String> lines = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(currentPath))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (java.io.FileNotFoundException exc) {
+            System.out.println("File not found");
+        } catch (IOException exc) {
+            System.out.println("Exception");
+        }
+        return lines;
+    }
+
+    private void writeFile(String line) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(currentPath, true))) {
+
+            bw.write(line);
+            bw.flush();
+        } catch (java.io.FileNotFoundException exc) {
+            System.out.println("File not found");
+        } catch (IOException exc) {
+            System.out.println("Exception");
+        }
+    }
+
+}
