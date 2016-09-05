@@ -9,6 +9,8 @@ public class HtmlParser {
 
     private static final Pattern REFERENCE_IMG_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+\\.?))");
     private static final Pattern REFERENCE_COMPLETE_IMG_SENTENCE_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+).*?\\.)");
+    private static final Pattern REFERENCE_IMG_LINK_PATTERN = Pattern.compile("(.*)[Нн]а\\sрисунке\\s\\d+(.*)");
+    private static final Pattern REFERENCE_ONE = Pattern.compile("(.*)[Нн]а\\sрисунке\\s\\d+(.*)");
 
     public ArrayList<String> readFile(String fileName) {
 
@@ -31,6 +33,7 @@ public class HtmlParser {
 
         ArrayList<String> lines = readFile(fileName);
         ArrayList<String> sourceLines = new ArrayList<>();
+        String prevLine = "";
         String tempLine = "";
         boolean isCompleteSentence = true;
 
@@ -70,8 +73,32 @@ public class HtmlParser {
                         tempLine = "";
                         isCompleteSentence = true;
                     }
+                } else {
+                    matcher = REFERENCE_IMG_LINK_PATTERN.matcher(line);
+                    if (matcher.find()) {
+                        
+                        if (matcher.group(1) == "") {
+                            if (matcher.group(2).contains(".")) {
+                                String[] tokens = line.split("\\.");
+                                sourceLines.add(tokens[0]);
+                            } else {
+                                tempLine += line + " ";
+                                isCompleteSentence = false;
+                            }
+                        } else {
+                            if (matcher.group(1).contains(".")) {
+                                   
+                            }
+                        }
+                        /*if (matcher.group(1).contains(".")) {
+                            String[] tokens = line.split("\\.");
+                            tempLine += tokens[1]
+                        }*/
+                    }
                 }
+
             }
+            prevLine = line;
         }
         return cleanSentences(sourceLines);
     }
