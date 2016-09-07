@@ -1,3 +1,5 @@
+package binarySearch;
+
 public class BinarySearch {
 
     public <T extends Comparable<T>> int binarySearch(T array[], T element) {
@@ -12,11 +14,10 @@ public class BinarySearch {
             } else  {
                 if (compareResult > 0) {
                     start = centre + 1;
-                } else {
-                    return centre;
                 }
+                    return centre;
             }
         }
-        return 0;
+        return -1;
     }
 }

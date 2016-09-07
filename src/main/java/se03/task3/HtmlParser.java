@@ -29,6 +29,67 @@ public class HtmlParser {
         return lines;
     }
 
+    public ArrayList<String> readFileTest(String fileName) {
+
+        ArrayList<String> lines = new ArrayList<>();
+        String line;
+        String tempLine = "";
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "CP1251"))) {
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                line = line.replaceAll("\\(Рис.*\\)", "");
+                line = line.replace("&nbsp;", "");
+                line = line.replaceAll("</?[a-z]*>", "");
+
+                if (line.contains(".")) {
+                    String[] tokens = line.split("\\.");
+
+                    switch (tokens.length) {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        default:
+                            for (String sentence : tokens) {
+
+                            }
+                            break;
+                    }
+                    System.out.println(tokens.length);
+                   /* if (tokens[0].equals(line)) {
+                        tempLine += line + " ";
+//                        lines.add(tempLine);
+                    } else {
+                        tempLine += tokens[0];
+                        if (!tempLine.endsWith("\\.")) {
+                            tempLine += ".";
+                        }
+                        lines.add(tempLine);
+                        if (tokens.length > 1) {
+                            tempLine = tokens[1];
+                        }
+                    }*/
+
+                   /* tempLine += tokens[0];
+                    lines.add(tempLine);
+                    tempLine = tokens[1];
+                } else {
+                    tempLine += line;
+                }*/
+//                lines.add(line);
+                }
+            }
+        } catch (FileNotFoundException exc) {
+            System.out.println("File not found!");
+        } catch (IOException exc) {
+            System.out.println("Read file exception!");
+        }
+        return lines;
+    }
+
     public ArrayList<String> linesWithPic(String fileName) {
 
         ArrayList<String> lines = readFile(fileName);
@@ -76,7 +137,7 @@ public class HtmlParser {
                 } else {
                     matcher = REFERENCE_IMG_LINK_PATTERN.matcher(line);
                     if (matcher.find()) {
-                        
+
                         if (matcher.group(1) == "") {
                             if (matcher.group(2).contains(".")) {
                                 String[] tokens = line.split("\\.");
@@ -87,7 +148,7 @@ public class HtmlParser {
                             }
                         } else {
                             if (matcher.group(1).contains(".")) {
-                                   
+
                             }
                         }
                         /*if (matcher.group(1).contains(".")) {
