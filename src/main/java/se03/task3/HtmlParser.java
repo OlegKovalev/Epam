@@ -40,7 +40,7 @@ public class HtmlParser {
                 line = line.trim();
                 line = line.replaceAll("\\(Рис.*\\)", "");
                 line = line.replace("&nbsp;", "");
-                line = line.replaceAll("</?[a-z]*>", "");
+                line = line.replaceAll("</?[a-z\\d]*>", "");
 
                 if (line.contains(".")) {
                     String[] tokens = line.split("\\.");
@@ -49,16 +49,27 @@ public class HtmlParser {
                         case 0:
                             break;
                         case 1:
+                            tempLine += tokens[0];
+                            lines.add(tempLine);
+                            tempLine = "";
                             break;
                         case 2:
+                            tempLine += tokens[0];
+                            lines.add(tempLine);
+                            tempLine = tokens[1];
                             break;
                         default:
                             for (String sentence : tokens) {
-
+                                if (sentence.equals(tokens[tokens.length-1])) {
+                                    tempLine += sentence + " ";
+                                } else {
+                                    tempLine += sentence;
+                                    lines.add(tempLine);
+                                    tempLine = "";
+                                }
                             }
                             break;
                     }
-                    System.out.println(tokens.length);
                    /* if (tokens[0].equals(line)) {
                         tempLine += line + " ";
 //                        lines.add(tempLine);
