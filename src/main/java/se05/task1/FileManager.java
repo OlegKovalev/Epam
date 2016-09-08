@@ -1,4 +1,4 @@
-package se05.task1;
+package main.java.se05.task1;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class FileManager {
         fileDir = new FileDirectory();
     }
 
-    void go() {
+    public void go() {
 //        ArrayList<File> files;
         ArrayList<String> fileNames;
         Matcher matcher;

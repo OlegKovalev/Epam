@@ -1,4 +1,4 @@
-package se03.task3;
+package main.java.se03.task3;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ public class HtmlParser {
     private static final Pattern REFERENCE_COMPLETE_IMG_SENTENCE_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+).*?\\.)");
     private static final Pattern REFERENCE_IMG_LINK_PATTERN = Pattern.compile("(.*)[Нн]а\\sрисунке\\s\\d+(.*)");
     private static final Pattern REFERENCE_ONE = Pattern.compile("(.*\\.)?(.*[Нн]а\\sрисунке\\s\\d+)((.*\\.)?.*)");
+    private static final Pattern REFERENCE_T = Pattern.compile("(.*?[а-я|)|>|»|0-9][.|!|?])\\s([А-Я].*)");
 
     public ArrayList<String> readFile(String fileName) {
 
@@ -34,36 +35,50 @@ public class HtmlParser {
         ArrayList<String> lines = new ArrayList<>();
         String line;
         String tempLine = "";
+        int count = 0;
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "CP1251"))) {
             while ((line = br.readLine()) != null) {
-                line = line.trim();
                 line = line.replaceAll("\\(Рис.*\\)", "");
                 line = line.replace("&nbsp;", "");
                 line = line.replaceAll("</?[a-z\\d]*>", "");
+                line = line.trim();
+                
+                Matcher matcher = REFERENCE_T.matcher(line);
+               
+                if (matcher.find()) {
+                    tempLine += matcher.group(1);
+                    lines.add(tempLine);
+                    tempLine = matcher.group(2);
+                } else {
+                    tempLine += line;
+                }
 
                 if (line.contains(".")) {
-                    String[] tokens = line.split("\\.");
-
+                    String[] tokens = line.split("\\.\\s[А-Я]");
+                    
+                    /*for (String token : tokens) {
+                        System.out.println(token);
+                    }*/
                     switch (tokens.length) {
-                        case 0:
-                            break;
+                        /*case 0:
+                            break;*/
                         case 1:
-                            tempLine += tokens[0];
+                            tempLine += tokens[0] + "";
                             lines.add(tempLine);
                             tempLine = "";
                             break;
                         case 2:
-                            tempLine += tokens[0];
+                            tempLine += tokens[0] + ".";
                             lines.add(tempLine);
-                            tempLine = tokens[1];
+                            tempLine = tokens[1] + " ";
                             break;
                         default:
                             for (String sentence : tokens) {
                                 if (sentence.equals(tokens[tokens.length-1])) {
                                     tempLine += sentence + " ";
                                 } else {
-                                    tempLine += sentence;
+                                    tempLine += sentence + ".";
                                     lines.add(tempLine);
                                     tempLine = "";
                                 }
@@ -91,6 +106,8 @@ public class HtmlParser {
                     tempLine += line;
                 }*/
 //                lines.add(line);
+                } else {
+                    tempLine += line + " ";
                 }
             }
         } catch (FileNotFoundException exc) {
@@ -98,7 +115,9 @@ public class HtmlParser {
         } catch (IOException exc) {
             System.out.println("Read file exception!");
         }
-        return lines;
+//        return lines;
+        System.out.println("------------------------------" + count);
+        return new ArrayList<>();
     }
 
     public ArrayList<String> linesWithPic(String fileName) {

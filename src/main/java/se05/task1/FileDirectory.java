@@ -1,4 +1,4 @@
-package se05.task1;
+package main.java.se05.task1;
 
 import java.io.File;
 import java.util.Date;

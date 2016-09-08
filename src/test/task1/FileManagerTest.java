@@ -1,9 +1,8 @@
-package se05.task1;
+package task1;
 
+import main.java.se05.task1.FileManager;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Oleg on 01.09.2016.

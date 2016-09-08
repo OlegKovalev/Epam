@@ -1,5 +1,6 @@
 package se03.task3;
 
+import main.java.se03.task3.HtmlParser;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -38,6 +39,7 @@ public class HtmlParserTest {
         lines.forEach(System.out::println);
 
     }
+
     @Ignore
     @Test
     public void isSuccessivelyLink() throws Exception {
