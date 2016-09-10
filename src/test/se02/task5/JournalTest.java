@@ -1,13 +1,7 @@
-package task5;
+package se02.task5;
 
 import org.junit.Before;
 import org.junit.Test;
-import se02.task5.Group;
-import se02.task5.Journal;
-import se02.task5.Student;
-import se02.task5.Subject;
-
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 
 public class JournalTest {
 

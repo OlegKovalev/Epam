@@ -47,6 +47,7 @@ public class HtmlParser {
                 Matcher matcher = REFERENCE_T.matcher(line);
                
                 if (matcher.find()) {
+//                    count++;
                     tempLine += matcher.group(1);
                     lines.add(tempLine);
                     tempLine = matcher.group(2);
@@ -57,12 +58,12 @@ public class HtmlParser {
                 if (line.contains(".")) {
                     String[] tokens = line.split("\\.\\s[А-Я]");
                     
-                    /*for (String token : tokens) {
+                    for (String token : tokens) {
                         System.out.println(token);
-                    }*/
+                    }
                     switch (tokens.length) {
-                        /*case 0:
-                            break;*/
+                        case 0:
+                            break;
                         case 1:
                             tempLine += tokens[0] + "";
                             lines.add(tempLine);
@@ -85,7 +86,7 @@ public class HtmlParser {
                             }
                             break;
                     }
-                   /* if (tokens[0].equals(line)) {
+                 /*   if (tokens[0].equals(line)) {
                         tempLine += line + " ";
 //                        lines.add(tempLine);
                     } else {
@@ -97,9 +98,9 @@ public class HtmlParser {
                         if (tokens.length > 1) {
                             tempLine = tokens[1];
                         }
-                    }*/
+                    }
 
-                   /* tempLine += tokens[0];
+                    tempLine += tokens[0];
                     lines.add(tempLine);
                     tempLine = tokens[1];
                 } else {
@@ -116,7 +117,7 @@ public class HtmlParser {
             System.out.println("Read file exception!");
         }
 //        return lines;
-        System.out.println("------------------------------" + count);
+        System.out.println("------------------------------   " + count);
         return new ArrayList<>();
     }
 

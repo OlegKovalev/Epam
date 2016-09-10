@@ -1,4 +1,4 @@
-package task1;
+package se05.task1;
 
 import main.java.se05.task1.FileManager;
 import org.junit.Before;
