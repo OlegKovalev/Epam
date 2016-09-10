@@ -2,7 +2,6 @@ package se04.task1;
 
 import org.junit.Before;
 import org.junit.Test;
-import se04.task1.JavaFileParser;
 
 public class JavaFileParserTest {
 
@@ -10,8 +9,8 @@ public class JavaFileParserTest {
 
     @Before
     public void init() throws Exception {
-        parser = new JavaFileParser("./src/se04/resources/task1/FileForExample",
-                "./src/se04/resources/task1/OutputFile");
+        parser = new JavaFileParser("./src/se04/se04/se05.task1/FileForExample",
+                "./src/se04/se04/se05.task1/OutputFile");
     }
 
     @Test

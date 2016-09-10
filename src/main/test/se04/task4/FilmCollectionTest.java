@@ -1,11 +1,9 @@
 package se04.task4;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.Serializable;
-import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +14,7 @@ public class FilmCollectionTest implements Serializable {
     
     @Before
     public void setUp() throws Exception {
-        films = new FilmCollection("./src/se04/resources/task4/films.ser");
+        films = new FilmCollection("./src/se04/se04/task4/films.ser");
         
         films.addFilm(new Film("Now You See Me", new Actor("Mark","Ruffalo"), new Actor("Woody","Harrelson"), new Actor("Isla","Fisher")));
         films.addFilm(new Film("Lock, Stock and Two Smoking Barrels", new Actor("Jason","Flemyng"), new Actor("Dexter","Fletcher"), new Actor("Nick","Moran")));

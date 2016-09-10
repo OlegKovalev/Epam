@@ -3,8 +3,6 @@ package wsd;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Олег on 20.08.2016.
  */
