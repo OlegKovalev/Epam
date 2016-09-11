@@ -1,6 +1,5 @@
 package binarySearch;
 
-import main.java.binarySearch.BinarySearch;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

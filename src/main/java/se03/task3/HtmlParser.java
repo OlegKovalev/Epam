@@ -7,42 +7,54 @@ import java.util.regex.Pattern;
 
 public class HtmlParser {
 
-//    private static final Pattern REFERENCE_IMG_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+\\.?))");
-//    private static final Pattern REFERENCE_COMPLETE_IMG_SENTENCE_PATTERN = Pattern.compile(">([Рр]ис\\.\\s?(\\d+).*?\\.)");
-//    private static final Pattern REFERENCE_IMG_LINK_PATTERN = Pattern.compile("(.*)[Нн]а\\sрисунке\\s\\d+(.*)");
-//    private static final Pattern REFERENCE_ONE = Pattern.compile("(.*\\.)?(.*[Нн]а\\sрисунке\\s\\d+)((.*\\.)?.*)");
-    private static final Pattern REFERENCE_SENTENCE_PATTERN = Pattern.compile("(.*?[а-я|)|>|»|0-9][.|!|?])(\\s[А-Я].*)?");
+    private static final Pattern REFERENCE_RU_LANGUAGE_PATTERN = Pattern.compile(".*[А-я].*");
+    private static final Pattern REFERENCE_SENTENCE_PATTERN = Pattern.compile("(.*?[^Рис][А-я|)|>|»|0-9|\\s][.|!|?])([\\sА-Я<].*)?");
     private static final Pattern REFERENCE_IMG_LINK_PATTERN = Pattern.compile(".*[Нн]а\\sрисунке\\s(\\d+).*");
 
-   
 
     public ArrayList<String> readFileTest(String fileName) {
 
         ArrayList<String> lines = new ArrayList<>();
-        Matcher matcherSentence, matcherImg;
+        Matcher matcherSentence;
         String line;
         String tempLine = "";
-//        int count = 0;
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "CP1251"))) {
             while ((line = br.readLine()) != null) {
-                line = line.replaceAll("\\(Рис.*\\)", "");
+                line = line.replaceAll("\\([Рр]ис.\\s?\\d+\\)", "");
                 line = line.replace("&nbsp;", "");
-                line = line.replaceAll("</?[a-z\\d]*>", "");
+                line = line.replaceAll("<.*?>", "");
                 line = line.trim();
 
-                matcherSentence = REFERENCE_SENTENCE_PATTERN.matcher(line);
-                if (matcherSentence.find()) {
-                    tempLine += matcherSentence.group(1);
-                    matcherImg = REFERENCE_IMG_LINK_PATTERN.matcher(tempLine);
-                    if (matcherImg.find()) {
-                        lines.add(tempLine);
-                    }
-                    tempLine = matcherSentence.group(2);
-                } else {
-                    tempLine += line;
-                }
+                if (REFERENCE_RU_LANGUAGE_PATTERN.matcher(line).find()) {
+                    matcherSentence = REFERENCE_SENTENCE_PATTERN.matcher(line);
 
+                    if (matcherSentence.find()) {
+                        tempLine += matcherSentence.group(1);
+                        if (REFERENCE_IMG_LINK_PATTERN.matcher(tempLine).find()) {
+                            tempLine = tempLine.replaceAll("null", "");
+                            lines.add(clearSentence(tempLine));
+                        }
+                        tempLine = matcherSentence.group(2);
+                        if (tempLine != null) {
+
+                            if (REFERENCE_SENTENCE_PATTERN.matcher(tempLine).find() && REFERENCE_IMG_LINK_PATTERN.matcher(tempLine).find()) {
+                                String[] sentences = tempLine.split("[.|!|?]");
+                                int tokensCount = sentences.length;
+                                if (tokensCount == 1) {
+                                    lines.add(clearSentence(sentences[0]));
+                                } else {
+                                    for (int i = 0; i < tokensCount; i++) {
+                                        if (sentences[i].contains("а рисунке")) {
+                                            lines.add(clearSentence(sentences[i]));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        tempLine = "";
+                    }
+                }
             }
         } catch (FileNotFoundException exc) {
             System.out.println("File not found!");
@@ -50,83 +62,7 @@ public class HtmlParser {
             System.out.println("Read file exception!");
         }
         return lines;
-//        System.out.println("------------------------------   " + count);
-//        return new ArrayList<>();
     }
-
-//    public ArrayList<String> linesWithPic(String fileName) {
-//
-//        ArrayList<String> lines = readFile(fileName);
-//        ArrayList<String> sourceLines = new ArrayList<>();
-//        String prevLine = "";
-//        String tempLine = "";
-//        boolean isCompleteSentence = true;
-//
-//        for (String line : lines) {
-//
-//            line = line.trim();
-//            line = line.replaceAll("\\(Рис.*\\)", "");
-//
-//            Matcher matcher = REFERENCE_IMG_PATTERN.matcher(line);
-//
-//            if (matcher.find()) {
-//                //this is only for 16th line with pic 
-//                if (matcher.group(2).contains(".")) {
-//                    int dotPos = matcher.end(2);
-//                    line = line.substring(0, dotPos - 1) + line.substring(dotPos);
-//                }
-//
-//                matcher = REFERENCE_COMPLETE_IMG_SENTENCE_PATTERN.matcher(line);
-//                if (matcher.find()) {
-//                    sourceLines.add(matcher.group(1));
-//                } else {
-//                    tempLine = line + " ";
-//                    isCompleteSentence = false;
-//                }
-//            } else {
-//                if (!isCompleteSentence) {
-//                    String[] tokens = line.split("\\.");
-//
-//                    if (tokens[0].equals(line)) {
-//                        tempLine += line + " ";
-//                    } else {
-//                        tempLine += tokens[0];
-//                        if (!tempLine.endsWith("\\.")) {
-//                            tempLine += ".";
-//                        }
-//                        sourceLines.add(tempLine);
-//                        tempLine = "";
-//                        isCompleteSentence = true;
-//                    }
-//                } else {
-//                    matcher = REFERENCE_SENTENCE_PATTERN.matcher(line);
-//                    if (matcher.find()) {
-//
-//                        if (matcher.group(1) == "") {
-//                            if (matcher.group(2).contains(".")) {
-//                                String[] tokens = line.split("\\.");
-//                                sourceLines.add(tokens[0]);
-//                            } else {
-//                                tempLine += line + " ";
-//                                isCompleteSentence = false;
-//                            }
-//                        } else {
-//                            if (matcher.group(1).contains(".")) {
-//
-//                            }
-//                        }
-//                        /*if (matcher.group(1).contains(".")) {
-//                            String[] tokens = line.split("\\.");
-//                            tempLine += tokens[1]
-//                        }*/
-//                    }
-//                }
-//
-//            }
-//            prevLine = line;
-//        }
-//        return cleanSentences(sourceLines);
-//    }
 
     public boolean isSuccessivelyLink(String fileName) {
 
@@ -149,90 +85,13 @@ public class HtmlParser {
         }
         return true;
     }
+
+    private String clearSentence(String sentence) {
+        sentence = sentence.trim();
+        if (!sentence.endsWith(".")) {
+            sentence += ".";
+        }
+        sentence += "\n";
+        return sentence;
+    }
 }
-
-    /*private ArrayList<String> cleanSentences(ArrayList<String> lines) {
-        ArrayList<String> convertedSentences = new ArrayList<>();
-
-        for (String line : lines) {
-            line = line.replace("&nbsp;", "");
-            line = line.replaceAll("</?[a-z]*>", "");
-            convertedSentences.add(line);
-        }
-
-        return convertedSentences;
-    }*/
-    
-    /* public ArrayList<String> readFile(String fileName) {
-
-        ArrayList<String> lines = new ArrayList<>();
-        String line;
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "CP1251"))) {
-            while ((line = br.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (FileNotFoundException exc) {
-            System.out.println("File not found!");
-        } catch (IOException exc) {
-            System.out.println("Read file exception!");
-        }
-        return lines;
-    }*/
-    
-    
-/*                if (line.contains(".")) {
-                    String[] tokens = line.split("\\.\\s[А-Я]");
-                    
-                    for (String token : tokens) {
-                        System.out.println(token);
-                    }
-                    switch (tokens.length) {
-                        case 0:
-                            break;
-                        case 1:
-                            tempLine += tokens[0] + "";
-                            lines.add(tempLine);
-                            tempLine = "";
-                            break;
-                        case 2:
-                            tempLine += tokens[0] + ".";
-                            lines.add(tempLine);
-                            tempLine = tokens[1] + " ";
-                            break;
-                        default:
-                            for (String sentence : tokens) {
-                                if (sentence.equals(tokens[tokens.length-1])) {
-                                    tempLine += sentence + " ";
-                                } else {
-                                    tempLine += sentence + ".";
-                                    lines.add(tempLine);
-                                    tempLine = "";
-                                }
-                            }
-                            break;
-                    }
-                 *//*   if (tokens[0].equals(line)) {
-                        tempLine += line + " ";
-//                        lines.add(tempLine);
-                    } else {
-                        tempLine += tokens[0];
-                        if (!tempLine.endsWith("\\.")) {
-                            tempLine += ".";
-                        }
-                        lines.add(tempLine);
-                        if (tokens.length > 1) {
-                            tempLine = tokens[1];
-                        }
-                    }
-
-                    tempLine += tokens[0];
-                    lines.add(tempLine);
-                    tempLine = tokens[1];
-                } else {
-                    tempLine += line;
-                }*//*
-//                lines.add(line);
-                } else {
-                    tempLine += line + " ";
-                }*/
