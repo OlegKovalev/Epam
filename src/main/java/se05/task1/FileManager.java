@@ -1,4 +1,4 @@
-package main.java.se05.task1;
+package se05.task1;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class FileManager {
 
     FileDirectory fileDir;
     Scanner sc;
-    private static final Pattern REFERENCE_INPUT_PATTERN = Pattern.compile(".*?([a-zA-Z]+)\\s*([a-zA-Z\\\\]*).*");
+    private static final Pattern REFERENCE_INPUT_PATTERN = Pattern.compile("([a-zA-Z]+)\\s*([a-zA-Z\\\\.]*)");
 
     private File currentPath;
 
@@ -32,40 +32,42 @@ public class FileManager {
                 fileDir.printDirectory(currentPath);
                 HelpOn.printHelp();
                 fileNames = new ArrayList<>(Arrays.asList(currentPath.list()));
-                System.out.println("Enter command: ");
-                /*
-                * Вот после вывода повисает
-                * Если убрать ввод, и передать матчеру строку напрямую, то всё работает..
-                * Scanner даёт тот же результат
-                * */
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+                System.out.print(currentPath.getAbsolutePath() + "\nEnter command: ");
+               /* try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
                     tmp = br.readLine();
                 } catch (IOException exc) {
                     exc.printStackTrace();
-                }
+                }*/
+             
                 
-                matcher = REFERENCE_INPUT_PATTERN.matcher(tmp);
+                /*   final String input = "Exit";
+                final InputStream stdin = System.in;
+                System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+                final Scanner scanner = new Scanner(System.in);
+               tmp = scanner.next();
+
+                System.setIn(stdin);
+                scanner.close();*/
+
+                matcher = REFERENCE_INPUT_PATTERN.matcher(sc.nextLine());
                 if (matcher.find()) {
-//            System.out.println(matcher.group(1));
                     switch (matcher.group(1)) {
                         case "Exit":
                             System.exit(0);
                             break;
                         case "open":
                             if (fileNames.contains(matcher.group(2))) {
-                                String tempPath = currentPath.getAbsolutePath() + matcher.group(1);
+                                String tempPath = currentPath.getAbsolutePath() + "\\" + matcher.group(2);
                                 currentPath = new File(tempPath);
 
                                 if (currentPath.isFile()) {
                                     readFile().forEach(System.out::println);
 
-                                    System.out.print("Enter sentence for write. Enter dot '.' to finish.");
-                                    String writeLine = sc.next();
-
-                                    if (writeLine.contains(".")) {
-                                        String[] tokens = writeLine.split("\\.");
-                                        writeFile(tokens[0] + ".\n");
-                                    }
+                                    System.out.print("Enter sentence for write: ");
+                                    writeFile(sc.nextLine());
+                                    
+                                    getParentPath();
                                 } else {
                                     System.out.println("Move to " + tempPath);
                                 }
@@ -74,11 +76,7 @@ public class FileManager {
                             }
                             break;
                         case "back":
-                            if (currentPath.getParent() == null) {
-                                System.out.println("This parent directory.");
-                            } else {
-                                currentPath = new File(currentPath.getParent());
-                            }
+                            getParentPath();
                             break;
                         case "cd":
 
@@ -103,17 +101,16 @@ public class FileManager {
 
     private ArrayList<String> readFile() {
         ArrayList<String> lines = new ArrayList<>();
+        String line;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(currentPath))) {
-            String line;
-
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(currentPath), "UTF-8"))) {
             while ((line = br.readLine()) != null) {
                 lines.add(line);
             }
-        } catch (java.io.FileNotFoundException exc) {
-            System.out.println("File not found");
+        } catch (FileNotFoundException exc) {
+            System.out.println("File not found!");
         } catch (IOException exc) {
-            System.out.println("Exception");
+            System.out.println("Read file exception!");
         }
         return lines;
     }
@@ -129,5 +126,22 @@ public class FileManager {
             System.out.println("Exception");
         }
     }
+
+    private void getParentPath() {
+        if (currentPath.getParent() == null) {
+            System.out.println("This parent directory.");
+        } else {
+            currentPath = new File(currentPath.getParent());
+        }
+    }
+     
+    /*public String inputReader(InputStreamReader isr){
+        try (BufferedReader br = new BufferedReader(isr)) {
+            return br.readLine();
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
+        return "";
+    }*/
 
 }
