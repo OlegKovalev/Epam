@@ -32,7 +32,6 @@ public class HtmlParser {
                     if (matcherSentence.find()) {
                         tempLine += matcherSentence.group(1);
                         if (REFERENCE_IMG_LINK_PATTERN.matcher(tempLine).find()) {
-                            tempLine = tempLine.replaceAll("null", "");
                             lines.add(clearSentence(tempLine));
                         }
                         tempLine = matcherSentence.group(2);
@@ -87,6 +86,7 @@ public class HtmlParser {
     }
 
     private String clearSentence(String sentence) {
+        sentence = sentence.replaceAll("null", "");
         sentence = sentence.trim();
         if (!sentence.endsWith(".")) {
             sentence += ".";
