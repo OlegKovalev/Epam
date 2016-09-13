@@ -11,7 +11,7 @@ public class FileManager {
 
     FileDirectory fileDir;
     Scanner sc;
-    private static final Pattern REFERENCE_INPUT_PATTERN = Pattern.compile("([a-zA-Z]+)\\s*([a-zA-Z\\\\.]*)");
+    private static final Pattern REFERENCE_INPUT_PATTERN = Pattern.compile("([a-zA-Z]+)\\s*([a-zA-Z\\\\.:]*)");
 
     private File currentPath;
 
@@ -22,38 +22,21 @@ public class FileManager {
     }
 
     public void go() {
-//        ArrayList<File> files;
         ArrayList<String> fileNames;
         Matcher matcher;
         String tmp = null;
         try {
-
             while (true) {
                 fileDir.printDirectory(currentPath);
                 HelpOn.printHelp();
+
                 fileNames = new ArrayList<>(Arrays.asList(currentPath.list()));
-                System.out.print(currentPath.getAbsolutePath() + "\nEnter command: ");
-               /* try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-                    tmp = br.readLine();
-                } catch (IOException exc) {
-                    exc.printStackTrace();
-                }*/
-             
-                
-                /*   final String input = "Exit";
-                final InputStream stdin = System.in;
-                System.setIn(new ByteArrayInputStream(input.getBytes()));
-
-                final Scanner scanner = new Scanner(System.in);
-               tmp = scanner.next();
-
-                System.setIn(stdin);
-                scanner.close();*/
+                printLine(currentPath.getAbsolutePath() + "\nEnter command: ");
 
                 matcher = REFERENCE_INPUT_PATTERN.matcher(sc.nextLine());
                 if (matcher.find()) {
                     switch (matcher.group(1)) {
-                        case "Exit":
+                        case "exit":
                             System.exit(0);
                             break;
                         case "open":
@@ -64,31 +47,45 @@ public class FileManager {
                                 if (currentPath.isFile()) {
                                     readFile().forEach(System.out::println);
 
-                                    System.out.print("Enter sentence for write: ");
+                                    printLine("Enter sentence for write: ");
                                     writeFile(sc.nextLine());
-                                    
+
                                     getParentPath();
                                 } else {
-                                    System.out.println("Move to " + tempPath);
+                                    printLine("Move to " + tempPath);
                                 }
                             } else {
-                                System.out.println("File not found!");
+                                printLine("File not found!");
                             }
                             break;
                         case "back":
                             getParentPath();
                             break;
                         case "cd":
-
+                            currentPath = new File(matcher.group(2));
                             break;
                         case "md":
-
+                            try {
+                                File newFile = new File(currentPath.getAbsolutePath() + "\\" + matcher.group(2));
+                                if (newFile.createNewFile()) {
+                                    printLine("New file " + matcher.group(2) + " was created.");
+                                }
+                            } catch (IOException exc) {
+                                printLine("IOException!");
+                            }
                             break;
                         case "del":
-
+                            try {
+                                File delFile = new File(currentPath.getAbsolutePath() + "\\" + matcher.group(2));
+                                if (delFile.delete()) {
+                                    printLine("File " + matcher.group(2) + " was deleted.");
+                                }
+                            } catch (SecurityException exc) {
+                                printLine("File cant't be deleted!");
+                            }
                             break;
                         default:
-                            System.out.println("Wrong command!");
+                            printLine("Wrong command!");
                             HelpOn.printHelp();
                             break;
                     }
@@ -108,40 +105,33 @@ public class FileManager {
                 lines.add(line);
             }
         } catch (FileNotFoundException exc) {
-            System.out.println("File not found!");
+            printLine("File not found!");
         } catch (IOException exc) {
-            System.out.println("Read file exception!");
+            printLine("Read file exception!");
         }
         return lines;
     }
 
     private void writeFile(String line) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(currentPath, true))) {
-
-            bw.write(line);
+            bw.write(line + "\n");
             bw.flush();
         } catch (java.io.FileNotFoundException exc) {
-            System.out.println("File not found");
+            printLine("File not found");
         } catch (IOException exc) {
-            System.out.println("Exception");
+            printLine("Exception");
         }
     }
 
     private void getParentPath() {
         if (currentPath.getParent() == null) {
-            System.out.println("This parent directory.");
+            printLine("This parent directory.");
         } else {
             currentPath = new File(currentPath.getParent());
         }
     }
-     
-    /*public String inputReader(InputStreamReader isr){
-        try (BufferedReader br = new BufferedReader(isr)) {
-            return br.readLine();
-        } catch (IOException exc) {
-            exc.printStackTrace();
-        }
-        return "";
-    }*/
 
+    private void printLine(String line) {
+        System.out.println(line);
+    }
 }

@@ -4,7 +4,7 @@ public class HelpOn {
 
     public static void printHelp() {
         System.out.println("\nPossible commands:\n" +
-                "0. Exit\n" +
+                "0. exit\n" +
                 "1. open [filename/catalog]\n" +
                 "2. back - return to parent directory \n" +
                 "3. cd [path] - change directory\n" +
