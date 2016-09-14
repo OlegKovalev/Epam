@@ -15,8 +15,15 @@ public class FileManager {
 
     private File currentPath;
 
-    public FileManager(String Path) {
-        this.currentPath = new File(Path);
+    public FileManager(String path) {
+        try {
+            this.currentPath = new File(path);
+        } catch (NullPointerException exc) {
+            throw new NullPointerException("File path is null!");
+        }
+        if (!currentPath.exists()) {
+            throw new NullPointerException("Wrong path!");
+        }
         sc = new Scanner(System.in);
         fileDir = new FileDirectory();
     }
@@ -116,7 +123,7 @@ public class FileManager {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(currentPath, true))) {
             bw.write(line + "\n");
             bw.flush();
-        } catch (java.io.FileNotFoundException exc) {
+        } catch (FileNotFoundException exc) {
             printLine("File not found");
         } catch (IOException exc) {
             printLine("Exception");

@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class FileManagerTest {
     FileManager fileManager;
 
-    @Before
+/*    @Before
     public void setUp() throws Exception {
         fileManager = new FileManager("O:\\test");
     }
@@ -26,7 +26,7 @@ public class FileManagerTest {
 //        System.setIn(System.in);
     }
 
-  /*  private String inputStream() {
+  *//*  private String inputStream() {
 //        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
 //            return br.readLine();
 //        } catch (IOException exc) {
