@@ -6,10 +6,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PropertyReaderTest {
-    PropertyReader propReader = new PropertyReader("se05.se04.task2.question");
+    PropertyReader propReader;
+
     @Before
     public void setUp() throws Exception {
-
+        propReader = new PropertyReader("se05.se04.task2.question");
     }
 
     @Test
