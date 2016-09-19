@@ -1,7 +1,7 @@
-out/production/Epam/se01/Note.class
-*.class
 .idea/workspace.xml
 *.iml
-.idea/workspace (3).xml
 *.xml
 .idea/*
+.idea/
+src/main/java/temp/
+target/
