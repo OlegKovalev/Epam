@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
+
 public class HtmlParserTest {
     
     HtmlParser parser;
@@ -17,14 +19,14 @@ public class HtmlParserTest {
 
     @Test
     public void readFileTest() throws Exception {
-        System.out.println("\nLines with img link:\n");
-        parser.readFileTest(path).forEach(System.out::println);
+        
+        assertEquals(32, parser.readFileTest(path).size());
     }
 
     @Test
     public void isSuccessivelyLink() throws Exception {
-        System.out.println("\nSuccessively or not link on img:");
-        System.out.print(parser.isSuccessivelyLink(path) + "\n\n");
+        
+        assertEquals(false, parser.isSuccessivelyLink(path));
     }
 
 }
