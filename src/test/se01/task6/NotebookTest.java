@@ -1,8 +1,6 @@
 package se01.task6;
 
-import main.java.se01.task6.Notebook;
 import org.junit.Before;
-
 
 
 public class NotebookTest {

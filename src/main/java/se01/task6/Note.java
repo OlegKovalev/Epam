@@ -1,4 +1,4 @@
-package main.java.se01.task6;
+package se01.task6;
 
 public class Note {
 
