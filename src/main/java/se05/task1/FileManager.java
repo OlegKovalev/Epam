@@ -9,11 +9,11 @@ import java.util.regex.Pattern;
 
 public class FileManager {
 
-    FileDirectory fileDir;
-    Scanner sc;
-    private static final Pattern REFERENCE_INPUT_PATTERN = Pattern.compile("([a-zA-Z]+)\\s*([a-zA-Z\\\\.:]*)");
-
+    private FileDirectory fileDir;
+    private Scanner sc;
     private File currentPath;
+
+    private static final Pattern REFERENCE_INPUT_PATTERN = Pattern.compile("([a-zA-Z]+)\\s*([a-zA-Z\\\\.:]*)");
 
     public FileManager(String path) {
         try {

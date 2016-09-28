@@ -20,40 +20,24 @@ public class FileDirectory {
     }
 
     private String fileType(File obj) {
-        if (obj.isFile()) {
-            return "File";
-        } else {
-            return "Catalog";
-        }
+        return obj.isFile() ? "File" : "Catalog";
     }
 
     private String fileEnhanced(File file) {
-        if (file.isFile()) {
-            String name = file.getName();
-            if (name.contains(".")) {
-                name = name.substring(name.lastIndexOf('.') + 1, name.length());
-                return name;
-            } else {
-                return "-";
-            }
+        String name;
+        if (file.isFile() && (name = file.getName()).contains(".")) {
+            name = name.substring(name.lastIndexOf('.') + 1, name.length());
+            return name;
         } else {
             return "-";
         }
     }
 
     private String fileAccess(File file) {
-        String access = "";
-        if (file.canRead()) {
-            access += "r";
-        } else {
-            access += "-";
-        }
-        access += "/";
-        if (file.canWrite()) {
-            access += "w";
-        } else {
-            access += "-";
-        }
+        String access;
+        
+        access = file.canRead() ? "r/" : "-/";
+        access += file.canWrite() ? "w" : "-";
         return access;
     }
 
