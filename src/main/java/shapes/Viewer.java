@@ -7,14 +7,14 @@ import shapes.model.Shape;
 
 public class Viewer {
 
-	public static void main(String[] args) throws InvalidValue {
+    public static void main(String[] args) throws InvalidValue {
 
-		Shape shape = new Circle(3, Color.GREEN, false);
+        Shape shape = new Circle(3, Color.GREEN, false);
 
-		System.out.println(shape.toString());
+        System.out.println(shape.toString());
 
-		Rectangle rect = new Rectangle(2, 3);
-		System.out.println(rect.toString());
-		
-	}
+        Rectangle rect = new Rectangle(2, 3);
+        System.out.println(rect.toString());
+
+    }
 }

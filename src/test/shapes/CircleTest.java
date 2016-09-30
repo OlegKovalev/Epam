@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import shapes.Color;
 import shapes.exception.InvalidValue;
 import shapes.model.Circle;
 import shapes.model.Point;
