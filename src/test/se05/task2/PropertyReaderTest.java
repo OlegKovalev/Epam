@@ -19,7 +19,6 @@ public class PropertyReaderTest {
     public void getKeys() throws Exception {
         Set<String> setOfProperties = propReader.getKeys();
         assertEquals(9, setOfProperties.size());
-//        setOfProperties.forEach(System.out::println);
     }
 
     @Test
