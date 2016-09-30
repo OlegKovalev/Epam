@@ -3,7 +3,8 @@ package se05.task1;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Formatter;
+
+import static java.lang.Math.pow;
 
 public class FileDirectory {
 
@@ -36,7 +37,7 @@ public class FileDirectory {
 
     private String fileAccess(File file) {
         String access;
-        
+
         access = file.canRead() ? "r/" : "-/";
         access += file.canWrite() ? "w" : "-";
         return access;
@@ -52,97 +53,18 @@ public class FileDirectory {
         if (file.isDirectory()) {
             return "-";
         } else {
-            String result;
             long size = file.length();
 
+            if (size >= pow(1024, 3)) {
+                return (size / (long) pow(1024, 3)) + " GB";
+            }
+            if (size >= pow(1024, 2)) {
+                return (size / (long) pow(1024, 2)) + " MB";
+            }
             if (size >= 1024) {
-                if (size >= 1024 * 1024) {
-                    if (size >= 1024 * 1024 * 1024) {
-                        if (size >= 1024 * 1024 * 1024 * 1024) {
-                            size = (long) size / 1024;
-                            size = (long) size / 1024;
-                            size = (long) size / 1024;
-                            size = (long) size / 1024;
-                            result = Long.toString(size) + " TB";
-                            return result;
-                        }
-                        size = (long) size / 1024;
-                        size = (long) size / 1024;
-                        size = (long) size / 1024;
-                        result = Long.toString(size) + " GB";
-                        return result;
-                    }
-                    size = (long) size / 1024;
-                    size = (long) size / 1024;
-                    result = Long.toString(size) + " MB";
-                    return result;
-                }
-                size = (long) size / 1024;
-                result = Long.toString(size) + " kB";
+                return (size / 1024) + " kB";
             }
-            if (size == -1) {
-                return "";
-            } else {
-                result = Long.toString(size) + " b";
-            }
-            return result;
+            return size + " b";
         }
     }
 }
-
-    /* java.lang.StackOverflowError
-    
-    private long fileSize(File file) {
-        long size = 0;
-        String result;
-
-        if (file.isFile()) {
-            size = file.length();
-        } else {
-            File[] subFiles = file.listFiles();
-            for (File innerFile : subFiles) {
-                if (innerFile.isFile()) {
-                    size += file.length();
-                } else {
-                    size += fileSize(file);
-                }
-            }
-        }
-        return size;
-    }
-   
-    private String formatFileSize(long size) {
-        String result;
-
-        if (size >= 1024) {
-            if (size >= 1024 * 1024) {
-                if (size >= 1024 * 1024 * 1024) {
-                    if (size >= 1024 * 1024 * 1024 * 1024) {
-                        size = (long) size / 1024;
-                        size = (long) size / 1024;
-                        size = (long) size / 1024;
-                        size = (long) size / 1024;
-                        result = Long.toString(size) + " TB";
-                        return result;
-                    }
-                    size = (long) size / 1024;
-                    size = (long) size / 1024;
-                    size = (long) size / 1024;
-                    result = Long.toString(size) + " GB";
-                    return result;
-                }
-                size = (long) size / 1024;
-                size = (long) size / 1024;
-                result = Long.toString(size) + " MB";
-                return result;
-            }
-            size = (long) size / 1024;
-            result = Long.toString(size) + " kB";
-        }
-        if (size == -1) {
-            return "";
-        } else {
-            result = Long.toString(size) + " b";
-        }
-        return result;
-    }*/
