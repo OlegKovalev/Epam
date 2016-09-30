@@ -1,5 +1,7 @@
 package se05.task1;
 
+import se05.task1.exception.FileCreateException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +30,7 @@ public class FileManager {
         fileDir = new FileDirectory();
     }
 
-    public void go() {
+    public void go() throws FileCreateException {
         ArrayList<String> fileNames;
         Matcher matcher;
         String tmp = null;
@@ -76,6 +78,8 @@ public class FileManager {
                                 File newFile = new File(currentPath.getAbsolutePath() + "\\" + matcher.group(2));
                                 if (newFile.createNewFile()) {
                                     printLine("New file " + matcher.group(2) + " was created.");
+                                } else {
+                                    throw new FileCreateException("File " + newFile.getAbsolutePath() + " already exists!");
                                 }
                             } catch (IOException exc) {
                                 printLine("IOException!");

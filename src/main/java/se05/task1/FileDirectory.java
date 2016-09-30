@@ -1,6 +1,7 @@
 package se05.task1;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
 
@@ -41,11 +42,9 @@ public class FileDirectory {
         return access;
     }
 
-    private Formatter lastModifies(File obj) {
-        Date date = new Date(obj.lastModified());
-        Formatter formatter = new Formatter();
-        formatter.format("%tH:%tM:%tS %td %tB %tY", date, date, date, date, date, date);
-        return formatter;
+    private String lastModifies(File obj) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:MM:ss  dd.MM.yyyy");
+        return dateFormat.format(new Date());
     }
 
     private String fileSize(File file) {
