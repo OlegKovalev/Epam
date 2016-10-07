@@ -1,6 +1,7 @@
 package se07.task2;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -32,4 +33,5 @@ public class PropertyReaderExecutor {
     public String getValue(String key) {
         return properties.get(key); 
     }
+    
 }

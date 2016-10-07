@@ -9,7 +9,6 @@ import java.util.List;
 public class DocumentReader {
 
     String path;
-//    List<String> transactions;
 
     public DocumentReader(String path) {
         this.path = path;
