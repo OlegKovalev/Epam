@@ -31,9 +31,9 @@ public class ExecutorTest {
     @Test
     public void executeTransaction() throws Exception {
         executor.executeTransaction(accountStore, 3);
-        for (Account account : accountList) {
-            System.out.println(account.getBalance());
-        }
+            assertEquals(3693,accountList.get(0).getBalance());
+            assertEquals(6827,accountList.get(1).getBalance());
+            assertEquals(4480,accountList.get(2).getBalance());
     }
 
 }
