@@ -1,4 +1,4 @@
-package se07.task1;
+package se07.task1_synchronized;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

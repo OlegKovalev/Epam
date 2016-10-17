@@ -1,4 +1,4 @@
-package se07.task1;
+package se07.task1_synchronized;
 
 public class Account {
 
@@ -9,7 +9,7 @@ public class Account {
         this.balance = balance;
         this.id = id;
     }
-    
+
     public int getBalance() {
         return balance;
     }
@@ -19,10 +19,10 @@ public class Account {
     }
 
     public synchronized void deposit(int amount) {
-        balance -= amount;
-    }
-    
-    public synchronized void withdraw(int amount) {
         balance += amount;
+    }
+
+    public synchronized void withdraw(int amount) {
+        balance -= amount;
     }
 }
